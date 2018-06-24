@@ -62,10 +62,13 @@
     <Compile Include="Entity\Location.cs" />
     <Compile Include="Entity\State.cs" />
     <Compile Include="Enum\IssueType.cs" />
+    <Compile Include="Helpers\Extensions.cs" />
+    <Compile Include="ICartegraphTownContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DTO\" />
+    <Folder Include="Factories\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
