@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.27428.2037
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "CartegraphTown.Database", "CartegraphTown.Database\CartegraphTown.Database.sqlproj", "{EE609A28-C3A6-45D8-AFCF-FCB0CF2D1FAB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CartegraphTown.Model", "CartegraphTown.Model\CartegraphTown.Model.csproj", "{EE32F27F-3D75-45E4-8F75-5C75269358EB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,6 +19,10 @@ Global
 		{EE609A28-C3A6-45D8-AFCF-FCB0CF2D1FAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EE609A28-C3A6-45D8-AFCF-FCB0CF2D1FAB}.Release|Any CPU.Build.0 = Release|Any CPU
 		{EE609A28-C3A6-45D8-AFCF-FCB0CF2D1FAB}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{EE32F27F-3D75-45E4-8F75-5C75269358EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE32F27F-3D75-45E4-8F75-5C75269358EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE32F27F-3D75-45E4-8F75-5C75269358EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE32F27F-3D75-45E4-8F75-5C75269358EB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
