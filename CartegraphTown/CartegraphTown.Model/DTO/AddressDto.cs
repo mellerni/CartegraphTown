@@ -28,6 +28,11 @@
         public string State { get; set; }
 
         /// <summary>
+        /// Location's state id
+        /// </summary>
+        public int StateId { get; set; }
+
+        /// <summary>
         /// Zip code of location [45678 or 45678-9010] 
         /// </summary>
         public string ZipCode { get; set; }
