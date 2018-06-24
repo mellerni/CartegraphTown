@@ -10,7 +10,6 @@
 
             this.ToTable("Citizens");
 
-            // Ignored Properties
             this.Ignore(x => x.FullName);
 
             this.Property(e => e.FirstName)
@@ -50,7 +49,7 @@
             this.Property(e => e.UpdatedBy)
                 .HasColumnName("UpdatedBy");
 
-            this.HasRequired(e => e.Location)
+            this.HasOptional(e => e.Location)
                 .WithMany(x => x.Citizens)
                 .HasForeignKey(e => e.LocationId);
         }
