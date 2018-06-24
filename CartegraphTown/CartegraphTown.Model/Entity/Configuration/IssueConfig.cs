@@ -10,6 +10,8 @@
 
             this.ToTable("Issues");
 
+            this.Ignore(x => x.HasBeenCorrected);
+
             this.Property(e => e.IssueType)
                 .HasColumnName("IssueType")
                 .IsRequired();

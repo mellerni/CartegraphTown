@@ -26,6 +26,15 @@
         /// </summary>
         public string Citizen { get; set; }
 
+        /// <summary>
+        /// Citizen's id reporting the issue
+        /// </summary>
+        public int CitizenId { get; set; }
+
+        /// <summary>
+        /// Location id where the issue occurred
+        /// </summary>
+        public int LocationId { get; set; }
 
         /// <summary>
         /// Issue details or description
