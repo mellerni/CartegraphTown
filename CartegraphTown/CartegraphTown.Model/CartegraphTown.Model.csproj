@@ -48,6 +48,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CartegraphTownContext.cs" />
+    <Compile Include="DTO\AddressDto.cs" />
+    <Compile Include="DTO\IssueDto.cs" />
+    <Compile Include="DTO\CitizenDto.cs" />
+    <Compile Include="DTO\Common\Result.cs" />
+    <Compile Include="DTO\Common\ResultBase.cs" />
+    <Compile Include="DTO\PointDto.cs" />
     <Compile Include="Entity\Base\Implementations\EntityBase.cs" />
     <Compile Include="Entity\Base\Interfaces\ITrackedEntity.cs" />
     <Compile Include="Entity\Base\Interfaces\ITrackCreateEntity.cs" />
@@ -67,7 +73,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="DTO\" />
     <Folder Include="Factories\" />
   </ItemGroup>
   <ItemGroup>
