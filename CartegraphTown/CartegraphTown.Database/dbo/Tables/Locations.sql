@@ -3,7 +3,7 @@
     [Address1]                          NVARCHAR (250)                  NULL,
     [Address2]                          NVARCHAR (250)                  NULL,
     [City]                              NVARCHAR (250)                  NULL,
-    [StateId]                           INT                             NOT NULL,
+    [StateId]                           INT                             NULL,
     [ZipCode]                           NVARCHAR (50)                   NULL,
     [Latitude]                          FLOAT                           NULL,   
     [Longitude]                         FLOAT                           NULL,  
