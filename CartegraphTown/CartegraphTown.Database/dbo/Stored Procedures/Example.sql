@@ -11,8 +11,10 @@ AS
 BEGIN
 	SET NOCOUNT ON;
 
-	SELECT u.Id
-	FROM dbo.Users u
-	WHERE u.CreatedDate BETWEEN @startDate AND @endDate
-	ORDER BY u.LastName, u.FirstName
+	SELECT c.Id
+        ,c.LastName
+        ,c.FirstName      
+	FROM dbo.Citizens c
+	WHERE c.CreatedDate BETWEEN @startDate AND @endDate
+	ORDER BY c.LastName, c.FirstName
 END

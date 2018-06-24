@@ -65,12 +65,13 @@
     <Folder Include="PublishOptions\Profile" />
     <Folder Include="PostDeploy" />
     <Folder Include="PreDeploy" />
+    <Folder Include="PostDeploy\Seed" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="PostDeployment.sql" />
     <PreDeploy Include="PreDeployment.sql" />
     <Build Include="dbo\Stored Procedures\Example.sql" />
-    <Build Include="dbo\Tables\Users.sql" />
+    <Build Include="dbo\Tables\Citizens.sql" />
     <None Include="Security\DefaultUsersAndRoles.sql" />
   </ItemGroup>
   <ItemGroup>
@@ -86,5 +87,11 @@
       <DefaultValue>1.0.0.0</DefaultValue>
       <Value>$(SqlCmdVar__1)</Value>
     </SqlCmdVariable>
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="dbo\Tables\Locations.sql" />
+    <Build Include="dbo\Tables\States.sql" />
+    <None Include="PostDeploy\Seed\AddStates.sql" />
+    <Build Include="dbo\Tables\Issues.sql" />
   </ItemGroup>
 </Project>
