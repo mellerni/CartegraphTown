@@ -1,18 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CartegraphTown.Model
+﻿namespace CartegraphTown.Model
 {
+    using System;
+    using System.Linq;
     using System.Data.Entity;
     using System.Data.Entity.Validation;
+    using System.Threading.Tasks;
     using System.Reflection;
     using Entity;
     using Entity.Base.Interfaces;
 
-    class CartegraphTownContext : DbContext
+    public class CartegraphTownContext : DbContext, ICartegraphTownContext
     {
 
         public CartegraphTownContext() : base("name=CartegraphTownContext")
