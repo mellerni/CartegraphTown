@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web.Http;
-
-namespace CartegraphTown.API
+﻿namespace CartegraphTown.API
 {
+    using System.Web.Http;
+    using System.Configuration;
+    using System.Web.Http.Cors;
     using Filters;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Serialization;
@@ -13,7 +11,10 @@ namespace CartegraphTown.API
     {
         public static void Register(HttpConfiguration config)
         {
-            // Web API configuration and services
+            // Enable Cors
+            var origin = ConfigurationManager.AppSettings["WebAppUrl"].TrimEnd('/');
+            var cors = new EnableCorsAttribute(origin, "*", "*", "FileName, FileType");
+            config.EnableCors(cors);
 
             // Web API routes
             config.MapHttpAttributeRoutes();
