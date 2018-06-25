@@ -1,0 +1,26 @@
+<h1>Citizen List</h1>
+
+<p *ngIf="!citizens"><em>Loading...</em></p>
+
+<p *ngIf="citizens && citizens.length === 0"><em>No citizens found.</em></p>
+
+<table class='table' *ngIf="citizens && citizens.length > 0">
+    <thead>
+        <tr>
+            <th>Last Name</th>
+            <th>First Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let citizen of citizens">
+            <td>{{ citizen.lastName }}</td>
+            <td>{{ citizen.firstName }}</td>
+            <td>{{ citizen.email }}</td>
+            <td>{{ citizen.phone }}</td>
+        </tr>
+    </tbody>
+</table>
+
+<button (click)="pressSuccess()">Test Toastr</button>
