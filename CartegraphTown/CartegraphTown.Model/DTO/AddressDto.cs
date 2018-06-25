@@ -1,5 +1,7 @@
 ﻿namespace CartegraphTown.Model.DTO
 {
+    using System;
+
     public class AddressDto
     {
         /// <summary>
@@ -36,5 +38,15 @@
         /// Zip code of location [45678 or 45678-9010] 
         /// </summary>
         public string ZipCode { get; set; }
+
+        /// <summary>
+        /// Date when location was created
+        /// </summary>
+        public DateTimeOffset CreatedDate { get; set; }
+
+        /// <summary>
+        /// Lat and Long of address
+        /// </summary>
+        public PointDto Point { get; set; }
     }
 }

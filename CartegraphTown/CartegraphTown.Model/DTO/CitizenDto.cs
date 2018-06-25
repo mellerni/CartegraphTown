@@ -1,5 +1,7 @@
 ﻿namespace CartegraphTown.Model.DTO
 {
+    using System;
+
     public class CitizenDto
     {
         /// <summary>
@@ -27,5 +29,9 @@
         /// </summary>
         public string Phone { get; set; }
 
+        /// <summary>
+        /// Date when citizen was created
+        /// </summary>
+        public DateTimeOffset CreatedDate { get; set; }
     }
 }

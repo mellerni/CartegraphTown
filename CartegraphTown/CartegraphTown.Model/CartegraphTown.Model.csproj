@@ -68,13 +68,14 @@
     <Compile Include="Entity\Location.cs" />
     <Compile Include="Entity\State.cs" />
     <Compile Include="Enum\IssueType.cs" />
+    <Compile Include="Factories\LocationFactory.cs" />
+    <Compile Include="Factories\IssueFactory.cs" />
+    <Compile Include="Factories\CitizenFactory.cs" />
     <Compile Include="Helpers\Extensions.cs" />
     <Compile Include="ICartegraphTownContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Factories\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />

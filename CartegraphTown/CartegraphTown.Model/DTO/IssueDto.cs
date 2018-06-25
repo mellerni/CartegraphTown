@@ -49,6 +49,11 @@
         /// <summary>
         /// Date when corrective action was taken for issue
         /// </summary>
-        public DateTime CorrectionDate { get; set; }
+        public DateTimeOffset? CorrectionDate { get; set; }
+
+        /// <summary>
+        /// Date when issue was created
+        /// </summary>
+        public DateTimeOffset CreatedDate { get; set; }
     }
 }
