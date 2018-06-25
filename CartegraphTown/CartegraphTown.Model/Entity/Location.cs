@@ -15,7 +15,7 @@
             this.Citizens = new HashSet<Citizen>();
         }
 
-        public Location(AddressDto model)
+        public Location(AddressDto model) : this(model.Point)
         {
             this.Validate(model);
             this.Address1 = model.Address1;
@@ -27,16 +27,12 @@
 
         public Location(PointDto model)
         {
-            this.Validate(model);
-            this.Latitude = model.Latitude;
-            this.Longitude = model.Longitude;
-        }
-
-        public Location(AddressDto addressModel, PointDto pointModel) : this(addressModel)
-        {
-            this.Validate(pointModel);
-            this.Latitude = pointModel.Latitude;
-            this.Longitude = pointModel.Longitude;
+            if (model != null)
+            {
+                this.Validate(model);
+                this.Latitude = model.Latitude;
+                this.Longitude = model.Longitude;
+            }
         }
 
         /// <summary>
@@ -57,7 +53,7 @@
         /// <summary>
         /// Foreign key of location's state
         /// </summary>
-        public int StateId { get; set; }
+        public int? StateId { get; set; }
 
         /// <summary>
         /// Zip code of location [45678 or 45678-9010] 
@@ -97,19 +93,18 @@
             this.City = model.City;
             this.StateId = model.StateId;
             this.ZipCode = model.ZipCode;
+
+            this.Update(model.Point);
         }
 
         public void Update(PointDto model)
         {
-            this.Validate(model);
-            this.Latitude = model.Latitude;
-            this.Longitude = model.Longitude;
-        }
-
-        public void Update(AddressDto addressModel, PointDto pointModel)
-        {
-            this.Update(addressModel);
-            this.Update(pointModel);
+            if (model != null)
+            {
+                this.Validate(model);
+                this.Latitude = model.Latitude;
+                this.Longitude = model.Longitude;
+            }
         }
 
         private void Validate(AddressDto model)
