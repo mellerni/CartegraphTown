@@ -93,5 +93,6 @@
     <Build Include="dbo\Tables\States.sql" />
     <None Include="PostDeploy\Seed\AddStates.sql" />
     <Build Include="dbo\Tables\Issues.sql" />
+    <Build Include="dbo\Tables\ExceptionLogs.sql" />
   </ItemGroup>
 </Project>
