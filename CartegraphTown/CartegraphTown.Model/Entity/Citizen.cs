@@ -45,7 +45,7 @@
         /// <summary>
         /// Foreign key of citizen's location
         /// </summary>
-        public int LocationId { get; set; }
+        public int? LocationId { get; set; }
 
 
         /// <summary>
