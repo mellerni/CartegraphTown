@@ -1,20 +1,14 @@
 import { Injectable, Inject } from '@angular/core';
-import { Http} from '@angular/http';
+import { Http } from '@angular/http';
+import { Citizen } from '../classes/citizen';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
 
-export interface Citizen {
-    id: number;
-    firstName: string;
-    lastName: string;
-    email: string;
-    phone: string;
-    createdDate: Date;
-}
-
 @Injectable()
 export class CitizenService {
-   constructor(private http: Http, @Inject('BASE_API_URL') private baseUrl: string) {}
+    private baseUrl = 'http://localhost:19275/api/';
+
+   constructor(private http: Http) {}
 
    public getAll() {
         let apiURL = `${this.baseUrl}citizen/getAll`;
@@ -23,6 +17,32 @@ export class CitizenService {
           .toPromise()
    }
 
+   public get(id: number) {
+    let apiURL = `${this.baseUrl}citizen/get/${id}`;
+    return this.http.get(apiURL)
+      .map((response) => response.json())
+      .toPromise()
+    }
 
+    public post(citizen: Citizen) {
+        let apiURL = `${this.baseUrl}citizen`;
+        return this.http.post(apiURL, citizen)
+          .map((response) => response.json())
+          .toPromise()
+        }
+
+    public put(citizen: Citizen) {
+        let apiURL = `${this.baseUrl}citizen`;
+        return this.http.put(apiURL, citizen)
+            .map((response) => response.json())
+            .toPromise()
+        }
+
+    public delete(id: number) {
+        let apiURL = `${this.baseUrl}citizen?citizenId=${id}`;
+        return this.http.delete(apiURL)
+            .map((response) => response.json())
+            .toPromise()
+        }
 
 }

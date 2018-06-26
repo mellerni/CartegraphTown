@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, Title } from '@angular/platform-browser';
+import { FormsModule }   from '@angular/forms';
 import { AppModuleShared } from './app.shared.module';
 import { AppComponent } from './components/app/app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -10,13 +11,14 @@ import { ToastModule } from 'ng2-toastr/ng2-toastr';
     bootstrap: [ AppComponent ],
     imports: [
         BrowserModule,
+        FormsModule,
         AppModuleShared,
         BrowserAnimationsModule,
-        ToastModule.forRoot()
+        ToastModule.forRoot(),
     ],
     providers: [
+        Title,
         { provide: 'BASE_URL', useFactory: getBaseUrl },
-        { provide: 'BASE_API_URL', useFactory: getBaseApiUrl }
     ]
 })
 export class AppModule {
@@ -24,9 +26,5 @@ export class AppModule {
 
 export function getBaseUrl() {
     return document.getElementsByTagName('base')[0].href;
-}
-
-export function getBaseApiUrl() {
-    return 'http://localhost:19275/api/';
 }
 

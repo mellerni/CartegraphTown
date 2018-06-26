@@ -26,7 +26,7 @@ namespace CartegraphTown.Service.Interfaces
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        Task<ResultBase> CreateAsync(CitizenDto model);
+        Task<Result<int>> CreateAsync(CitizenDto model);
 
         /// <summary>
         /// Update existing citizen.

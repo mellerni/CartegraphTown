@@ -70,28 +70,28 @@
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public async Task<ResultBase> CreateAsync(CitizenDto model)
+        public async Task<Result<int>> CreateAsync(CitizenDto model)
         {
             try
             {
                 if (model == null)
                 {
-                    return ResultBase.Failure("Model is empty.");
+                    return Result<int>.Failure("Model is empty.");
                 }
 
                 var citizen = new Citizen(model);
                 this.Db.Citizens.Add(citizen);
                 await this.Db.SaveChangesAsync();
-                return ResultBase.Success();
+                return Result<int>.Success(citizen.Id);
             }
             catch (ArgumentException argumentException)
             {
-                return ResultBase.Failure(argumentException.Message);
+                return Result<int>.Failure(argumentException.Message);
             }
             catch (Exception exception)
             {
                 Log.Logger.Error(exception, "Error in Citizen Create method.");
-                return ResultBase.Failure($"Error in Citizen Create method.");
+                return Result<int>.Failure($"Error in Citizen Create method.");
             }
         }
 

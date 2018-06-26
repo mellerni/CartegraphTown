@@ -1,9 +1,10 @@
 import { Component, OnInit, ViewContainerRef } from '@angular/core';
-import { Citizen, CitizenService } from '../../services/citizen.service';
+import { Citizen } from '../../classes/citizen';
+import { CitizenService } from '../../services/citizen.service';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
 @Component({
-    selector: 'citizenIndex',
+    selector: 'citizen-index',
     templateUrl: './citizen.index.component.html'
 })
 export class CitizenIndexComponent {
@@ -17,11 +18,6 @@ export class CitizenIndexComponent {
             .then(result => {
                 this.citizens = result as Citizen[];
             })
-            .catch(error => console.error(error))
+            .catch(error => this.toastr.error(error, 'Error:'))
     }
-
-    public pressSuccess() {
-        this.toastr.success('Hello world!', 'Toastr fun!');
-    }
-
 }

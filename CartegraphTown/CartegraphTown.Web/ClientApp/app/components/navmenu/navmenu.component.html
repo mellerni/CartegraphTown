@@ -18,6 +18,16 @@
                     </a>
                 </li>
                 <li [routerLinkActive]="['link-active']">
+                    <a [routerLink]="['/citizen-add']">
+                        <span class='fa fa-user'></span>&nbsp;&nbsp;Add Citizen
+                    </a>
+                </li>
+                <li [routerLinkActive]="['link-active']">
+                    <a [routerLink]="['/citizen-edit/1']">
+                        <span class='fa fa-user'></span>&nbsp;&nbsp;Edit Citizen
+                    </a>
+                </li>
+                <li [routerLinkActive]="['link-active']">
                     <a [routerLink]="['/citizen-index']">
                         <span class='fa fa-user'></span>&nbsp;&nbsp;Citizen
                     </a>
