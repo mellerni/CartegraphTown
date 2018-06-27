@@ -5,19 +5,40 @@ import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
 @Component({
     selector: 'citizen-index',
-    templateUrl: './citizen.index.component.html'
+    templateUrl: './citizen.index.component.html',
+    styleUrls: ['./citizen.index.component.css']
 })
 export class CitizenIndexComponent {
     public citizens: Citizen[];
+    public loading: boolean;
 
     constructor(private citizenService: CitizenService, private toastr: ToastsManager, private vRef: ViewContainerRef) {
         this.toastr.setRootViewContainerRef(vRef);
     }
     ngOnInit() {
-        this.citizenService.getAll()
-            .then(result => {
-                this.citizens = result as Citizen[];
-            })
-            .catch(error => this.toastr.error(error, 'Error:'))
+        this.loading = true;
+        this.getCitizens();
     }
+
+    getCitizens()
+    {
+        this.citizenService.getAll()
+        .then(result => {
+            this.citizens = result as Citizen[];
+            this.loading = false;
+        })
+        .catch(error => this.toastr.error(error, 'Error:'));
+    }
+
+    deleteCitizen(citizenId: number)
+    {
+        this.citizenService.delete(citizenId)
+            .then(result => {
+                this.toastr.success('Citizen deleted.')
+                this.loading = true;
+                this.getCitizens();
+            })
+            .catch(error => this.toastr.error(error, 'Error:'));
+    }
+
 }

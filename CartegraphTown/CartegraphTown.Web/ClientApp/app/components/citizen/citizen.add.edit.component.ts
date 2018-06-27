@@ -1,12 +1,13 @@
 import { Component, OnInit, ViewContainerRef } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Citizen } from '../../classes/citizen';
 import { CitizenService } from '../../services/citizen.service';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
 @Component({
     selector: 'citizen-add-edit',
-    templateUrl: './citizen.add.edit.component.html'
+    templateUrl: './citizen.add.edit.component.html',
+    styleUrls: ['./citizen.add.edit.component.css']
 })
 export class CitizenAddEditComponent {
     public citizen: Citizen;
@@ -15,7 +16,8 @@ export class CitizenAddEditComponent {
     public title = 'Add Citizen';
 
     constructor(private citizenService: CitizenService,
-                private route: ActivatedRoute,
+                private activeRoute: ActivatedRoute,
+                private router: Router,
                 private toastr: ToastsManager,
                 private vRef: ViewContainerRef) {
         this.toastr.setRootViewContainerRef(vRef);
@@ -24,7 +26,7 @@ export class CitizenAddEditComponent {
     ngOnInit() {
         this.loading = true;
         this.citizen = new Citizen({id:0, firstName: '', lastName: '',  email: '',  phone: ''});
-        this.route.params.subscribe(params => {
+        this.activeRoute.params.subscribe(params => {
             console.log(params);
             this.citizenId = params.id;
             this.getCitizen();
@@ -54,12 +56,14 @@ export class CitizenAddEditComponent {
                     this.citizenId = result as number;
                     this.citizen.id = this.citizenId;
                     this.toastr.success('New citizen saved.', 'Success:')
+                    this.router.navigate(['/citizen-index/']);
                 })
                 .catch(error => this.toastr.error(error, 'Error:'))
         } else {
             this.citizenService.put(this.citizen)
                 .then(result => {
                     this.toastr.success('Citizen edits saved.', 'Success:')
+                    this.router.navigate(['/citizen-index/']);
                 })
                 .catch(error => this.toastr.error(error, 'Error:'))
         }

@@ -1,24 +1,53 @@
-<h1>Citizen List</h1>
+<div class='container'>
+    <h1>Citizen List</h1>
 
-<p *ngIf="!citizens"><em>Loading...</em></p>
+    <p *ngIf="loading">
+        <em>Loading...</em>
+    </p>
 
-<p *ngIf="citizens && citizens.length === 0"><em>No citizens found.</em></p>
+    <p *ngIf="citizens && citizens.length === 0">
+        <em>No citizens found.</em>
+    </p>
 
-<table class='table' *ngIf="citizens && citizens.length > 0">
-    <thead>
-        <tr>
-            <th>Last Name</th>
-            <th>First Name</th>
-            <th>Email</th>
-            <th>Phone</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let citizen of citizens">
-            <td>{{ citizen.lastName }}</td>
-            <td>{{ citizen.firstName }}</td>
-            <td>{{ citizen.email }}</td>
-            <td>{{ citizen.phone }}</td>
-        </tr>
-    </tbody>
-</table>
+    <div class="show-on-phone" *ngIf="citizens && citizens.length > 0">
+        <p>
+            <em>Records found!</em>
+            <br/>
+            <br/>
+            <em>However the width of your device to small to display the table.</em>
+            <br/>
+            <br/>
+            <em>Try a different orientation or device. 700 px display is required</em>
+        </p>
+    </div>
+
+    <div class="table-responsive hide-on-phone">
+        <table class="table table-striped table-hover table-responsive" *ngIf="citizens && citizens.length > 0">
+            <thead>
+                <tr>
+                    <th>Last Name</th>
+                    <th>First Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let citizen of citizens">
+                    <td>{{ citizen.lastName }}</td>
+                    <td>{{ citizen.firstName }}</td>
+                    <td>{{ citizen.email }}</td>
+                    <td>{{ citizen.phone }}</td>
+                    <td [routerLinkActive]="['link-active']">
+                        <a class="btn btn-default btn-md" role="button" [routerLink]="['/citizen-edit/' + citizen.id]">
+                            <span class="fa fa-user-edit"></span>&nbsp;&nbsp;Edit
+                        </a>
+                        <button class="btn btn-sm btn-danger" (click)="deleteCitizen(citizen.id)">
+                            <span class="fa fa-user-slash"></span>&nbsp;&nbsp;Delete
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

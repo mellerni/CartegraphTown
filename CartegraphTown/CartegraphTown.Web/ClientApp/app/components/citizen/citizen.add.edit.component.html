@@ -1,58 +1,63 @@
 <div class='container'>
     <h1>{{title}}</h1>
-    <p *ngIf="loading"><em>Loading...</em></p>
+    <p *ngIf="loading">
+        <em>Loading...</em>
+    </p>
     <form *ngIf="!loading" (ngSubmit)='onSubmit()' #citizenForm='ngForm'>
-      <div class='form-group'>
-        <label for='firstName'>First Name</label>
-        <input type='text' class='form-control' id='firstName' name='firstName'  placeholder='John'
-            required
-            [(ngModel)]='citizen.firstName'
-            #firstName = "ngModel"/>
+        <div class="row">
+            <div class='form-group col-md-6 col-sm-12'>
+                <label for='firstName'>First Name</label>
+                <input type='text' class='form-control' id='firstName' name='firstName' placeholder='John' required [(ngModel)]='citizen.firstName'
+                    #firstName="ngModel" />
 
-        <div *ngIf='firstName.invalid && (firstName.dirty || firstName.touched)' class='alert alert-danger'>
-            <div *ngIf='firstName.errors?.required'>
-                First Name is required
+                <div *ngIf='firstName.invalid && (firstName.dirty || firstName.touched)' class='alert alert-danger'>
+                    <div *ngIf='firstName.errors?.required'>
+                        First Name is required
+                    </div>
+                </div>
+            </div>
+
+            <div class='form-group col-md-6 col-sm-12'>
+                <label for='lastName'>Last Name</label>
+                <input type='text' class='form-control' id='lastName' name='lastName' placeholder='Doe' required [(ngModel)]='citizen.lastName'
+                    #lastName="ngModel" />
+                <div *ngIf='lastName.invalid && (lastName.dirty || lastName.touched)' class='alert alert-danger'>
+                    <div *ngIf='lastName.errors?.required'>
+                        Last Name is required
+                    </div>
+                </div>
             </div>
         </div>
-      </div>
 
-      <div class='form-group'>
-        <label for='lastName'>Last Name</label>
-        <input type='text' class='form-control' id='lastName' name='lastName' placeholder='Doe'
-            required
-            [(ngModel)]='citizen.lastName'
-            #lastName = "ngModel"/>
-        <div *ngIf='lastName.invalid && (lastName.dirty || lastName.touched)' class='alert alert-danger'>
-            <div *ngIf='lastName.errors?.required'>
-                Last Name is required
+        <div class="row">
+            <div class='form-group col-md-6 col-sm-12'>
+                <label for='email'>Email</label>
+                <input type='text' class='form-control' id='email' name='email' placeholder='john.doe@mailbox.com' pattern='[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$'
+                    [(ngModel)]='citizen.email' #email="ngModel" />
+
+                <div *ngIf='email.invalid && (email.dirty || email.touched)' class='alert alert-danger'>
+                    <div *ngIf='email.errors?.pattern && email.touched'>
+                        This is not a valid email. Please use this format [person@url.com].
+                    </div>
+                </div>
+            </div>
+
+            <div class='form-group col-md-6 col-sm-12'>
+                <label for='phone'>Phone</label>
+                <input type='text' class='form-control' id='phone' name='phone' placeholder='(563) 555-0000' [(ngModel)]='citizen.phone'
+                    #phone="ngModel" />
             </div>
         </div>
-      </div>
 
-      <div class='form-group'>
-        <label for='email'>Email</label>
-        <input type='text' class='form-control' id='email' name='email' placeholder='john.doe@mailbox.com'
-            pattern='[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$'
-            [(ngModel)]='citizen.email'
-            #email = "ngModel"/>
-
-        <div *ngIf='email.invalid && (email.dirty || email.touched)' class='alert alert-danger'>
-            <div *ngIf='email.errors?.pattern && email.touched'>
-                This is not a valid email. Please use this format [person@url.com].
+        <div class="row">
+            <div class="col-sm-text-center">
+                <button type='submit' class='btn btn-primary btn-lg' [disabled]='!citizenForm.form.valid'>
+                    <span class="fa fa-save"></span>&nbsp;&nbsp;Save
+                </button>
+                <a class="btn btn-default btn-lg" role="button" [routerLink]="['/citizen-index/']">
+                    <span class="fa fa-ban"></span>&nbsp;&nbsp;Cancel
+                </a>
             </div>
         </div>
-      </div>
-
-      <div class='form-group'>
-        <label for='phone'>Phone</label>
-        <input type='text' class='form-control' id='phone' name='phone' placeholder='(563) 555-0000'
-            [(ngModel)]='citizen.phone'
-            #phone = "ngModel"/>
-      </div>
-
-      <button type='submit' class='btn btn-success' [disabled]='!citizenForm.form.valid'>Submit</button>
-
     </form>
 </div>
-
-{{citizen | json}}
