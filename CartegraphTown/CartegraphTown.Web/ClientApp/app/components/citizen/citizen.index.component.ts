@@ -9,8 +9,8 @@ import { ToastsManager } from 'ng2-toastr/ng2-toastr';
     styleUrls: ['./citizen.index.component.css']
 })
 export class CitizenIndexComponent {
-    public citizens: Citizen[];
-    public loading: boolean;
+    public citizens: Citizen[] | undefined;
+    public loading: boolean | undefined;
 
     constructor(private citizenService: CitizenService, private toastr: ToastsManager, private vRef: ViewContainerRef) {
         this.toastr.setRootViewContainerRef(vRef);

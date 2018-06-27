@@ -1,11 +1,11 @@
 export class Citizen {
 
-  id: number;
-  firstName: string;
-  lastName: string;
-  email: string;
-  phone: string;
-  createdDate: Date;
+  public id: number = 0;
+  public firstName: string = "";
+  public lastName: string = "";
+  public email: string = "";
+  public phone: string = "";
+  public createdDate: Date = new Date();
 
   constructor(values: Object = {}) {
     Object.assign(this, values);

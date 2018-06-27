@@ -10,9 +10,9 @@ import { ToastsManager } from 'ng2-toastr/ng2-toastr';
     styleUrls: ['./citizen.add.edit.component.css']
 })
 export class CitizenAddEditComponent {
-    public citizen: Citizen;
-    public citizenId: number;
-    public loading: boolean;
+    public citizen: Citizen = new Citizen();
+    public citizenId: number = 0;
+    public loading: boolean = true;
     public title = 'Add Citizen';
 
     constructor(private citizenService: CitizenService,
@@ -25,7 +25,7 @@ export class CitizenAddEditComponent {
 
     ngOnInit() {
         this.loading = true;
-        this.citizen = new Citizen({id:0, firstName: '', lastName: '',  email: '',  phone: ''});
+        this.citizen = new Citizen();
         this.activeRoute.params.subscribe(params => {
             console.log(params);
             this.citizenId = params.id;
