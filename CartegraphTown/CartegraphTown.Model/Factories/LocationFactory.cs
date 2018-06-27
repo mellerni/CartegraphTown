@@ -47,5 +47,19 @@
 
             return null;
         }
+
+        public static StateDto State(State entity)
+        {
+            if (entity == null)
+            {
+                return null;
+            }
+
+            return new StateDto()
+            {
+                Id = entity.Id,
+                Abbreviation = entity.Abbreviation
+            };
+        }
     }
 }

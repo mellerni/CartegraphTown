@@ -8,6 +8,13 @@ namespace CartegraphTown.Service.Interfaces
     public interface ILocationService
     {
         /// <summary>
+        /// Retrieves all states for drop down.
+        /// </summary>
+        /// <returns></returns>
+        Task<Result<IEnumerable<StateDto>>> GetStates();
+
+
+        /// <summary>
         /// Retrieves single address location by id.
         /// </summary>
         /// <param name="id"></param>

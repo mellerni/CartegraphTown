@@ -69,6 +69,25 @@
         }
 
         /// <summary>
+        /// Retrieves all states as dictionary for drop down.
+        /// </summary>
+        /// <returns></returns>
+        public async Task<Result<IEnumerable<StateDto>>> GetStates()
+        {
+            try
+            {
+                var states = await this.Db.States.ToListAsync();
+                var stateDtos = states.Select(LocationFactory.State);
+                return Result<IEnumerable<StateDto>>.Success(stateDtos);
+            }
+            catch (Exception exception)
+            {
+                Log.Logger.Error(exception, "Error in Get All States method.");
+                return Result<IEnumerable<StateDto>>.Failure("Error in Get All States method.");
+            }
+        }
+
+        /// <summary>
         /// Retrieves all locations as addresses.
         /// </summary>
         /// <param name="id"></param>

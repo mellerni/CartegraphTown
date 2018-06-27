@@ -18,7 +18,7 @@
         private ILocationService Service { get; set; }
 
         [HttpGet]
-        [ResponseType(typeof(AddressDto))]
+        [ResponseType(typeof(IEnumerable<AddressDto>))]
         [Route("getAllAddresses")]
         public async Task<IHttpActionResult> GetAllAddresses()
         {
@@ -26,11 +26,19 @@
         }
 
         [HttpGet]
-        [ResponseType(typeof(PointDto))]
+        [ResponseType(typeof(IEnumerable<PointDto>))]
         [Route("getAllPoints")]
         public async Task<IHttpActionResult> GetAllPoints()
         {
             return this.ProcessResult(await this.Service.GetAllLocationsAsPointsAsync());
+        }
+
+        [HttpGet]
+        [ResponseType(typeof(IEnumerable<StateDto>))]
+        [Route("getStates")]
+        public async Task<IHttpActionResult> GetStates()
+        {
+            return this.ProcessResult(await this.Service.GetStates());
         }
 
         [HttpGet]
@@ -51,6 +59,7 @@
 
         [HttpPost]
         [ResponseType(typeof(string))]
+        [Route("postAddress")]
         public async Task<IHttpActionResult> Post([FromBody]AddressDto model)
         {
             return this.ProcessResult(await this.Service.CreateAsync(model));
@@ -58,6 +67,7 @@
 
         [HttpPost]
         [ResponseType(typeof(string))]
+        [Route("postPoint")]
         public async Task<IHttpActionResult> Post([FromBody]PointDto model)
         {
             return this.ProcessResult(await this.Service.CreateAsync(model));
@@ -65,6 +75,7 @@
 
         [HttpPut]
         [ResponseType(typeof(string))]
+        [Route("putAddress")]
         public async Task<IHttpActionResult> Put([FromBody]AddressDto model)
         {
             return this.ProcessResult(await this.Service.UpdateAsync(model));
@@ -72,6 +83,7 @@
 
         [HttpPut]
         [ResponseType(typeof(string))]
+        [Route("putPoint")]
         public async Task<IHttpActionResult> Put([FromBody]PointDto model)
         {
             return this.ProcessResult(await this.Service.UpdateAsync(model));
