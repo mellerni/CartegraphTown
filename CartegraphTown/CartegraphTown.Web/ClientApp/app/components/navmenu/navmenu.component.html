@@ -28,6 +28,23 @@
                         <span class='fa fa-user-plus'></span>&nbsp;&nbsp;Add Citizen
                     </a>
                 </li>
+                <hr/>
+                <li [routerLinkActive]="['link-active']">
+                    <a [routerLink]="['/location-index']">
+                        <span class='fa fa-map-marker-alt'></span>&nbsp;&nbsp;Locations Lists
+                    </a>
+                </li>
+                <li [routerLinkActive]="['link-active']">
+                    <a [routerLink]="['/address-add']">
+                        <span class='fa fa-map-marked-alt'></span>&nbsp;&nbsp;Add Address
+                    </a>
+                </li>
+                <li [routerLinkActive]="['link-active']">
+                        <a [routerLink]="['/point-add']">
+                            <span class='fa fa-map-pin'></span>&nbsp;&nbsp;Add Point
+                        </a>
+                </li>
+                <hr/>
                 <li [routerLinkActive]="['link-active']">
                     <a [routerLink]="['/fetch-data']">
                         <span class='fa fa-exclamation'></span>&nbsp;&nbsp;&nbsp;Issue

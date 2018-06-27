@@ -9,9 +9,12 @@ import { NavMenuComponent } from './components/navmenu/navmenu.component';
 import { HomeComponent } from './components/home/home.component';
 
 import { CitizenService } from './services/citizen.service';
+import { LocationService } from './services/location.service';
 
 import { CitizenIndexComponent } from './components/citizen/citizen.index.component';
 import { CitizenAddEditComponent } from './components/citizen/citizen.add.edit.component';
+import { LocationIndexComponent } from './components/location/location.index.component';
+import { AddressAddEditComponent } from './components/location/address.add.edit.component';
 
 
 @NgModule({
@@ -20,6 +23,8 @@ import { CitizenAddEditComponent } from './components/citizen/citizen.add.edit.c
         NavMenuComponent,
         CitizenIndexComponent,
         CitizenAddEditComponent,
+        LocationIndexComponent,
+        AddressAddEditComponent,
         HomeComponent
     ],
     imports: [
@@ -32,10 +37,15 @@ import { CitizenAddEditComponent } from './components/citizen/citizen.add.edit.c
             { path: 'citizen-index', component: CitizenIndexComponent },
             { path: 'citizen-add', component: CitizenAddEditComponent },
             { path: 'citizen-edit/:id', component: CitizenAddEditComponent},
+            { path: 'location-index', component: LocationIndexComponent },
+            { path: 'address-add', component: AddressAddEditComponent },
+            { path: 'address-edit/:id', component: AddressAddEditComponent},
+            //{ path: 'point-add', component: PointAddEditComponent },
+            // { path: 'point-edit/:id', component: PointAddEditComponent},
             { path: '**', redirectTo: 'home' }
         ])
     ],
-    providers: [CitizenService],
+    providers: [CitizenService, LocationService],
 })
 export class AppModuleShared {
 }
