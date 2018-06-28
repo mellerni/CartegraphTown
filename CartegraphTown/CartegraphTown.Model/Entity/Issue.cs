@@ -16,6 +16,8 @@
         {
             this.Validate(model);
             this.IssueType = model.IssueTypeId;
+            this.CitizenId = model.CitizenId;
+            this.LocationId = model.LocationId;
             this.Details = model.Details;
         }
 
@@ -71,6 +73,7 @@
             this.Validate(model);
             this.IssueType = model.IssueTypeId;
             this.Details = model.Details;
+            this.CorrectiveAction = model.CorrectiveAction;
 
             if (!string.IsNullOrWhiteSpace(model.CorrectiveAction))
             {
