@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewContainerRef } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output, ViewContainerRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Address } from '../../classes/address';
 import { State } from '../../classes/state';
@@ -18,6 +18,9 @@ export class AddressAddEditComponent {
     public loading: boolean = true;
     public loadingStates: boolean = true;
     public title = 'Add Address';
+    @Input() activeWalkThrough: boolean = false;
+    @Input() resetLocation: boolean = false;
+    @Output() sendLocationId = new EventEmitter<number>();
 
     constructor(private locationService: LocationService,
                 private activeRoute: ActivatedRoute,
@@ -46,7 +49,7 @@ export class AddressAddEditComponent {
                 this.address = result as Address;
                 this.loading = false;
             })
-            .catch(error => this.toastr.error(error, 'Error:'));
+            .catch(error => this.failure(error));
         } else {
             this.loading = false;
         }
@@ -59,7 +62,7 @@ export class AddressAddEditComponent {
             this.states = result as State[];
             this.loadingStates = false;
         })
-        .catch(error => this.toastr.error(error, 'Error:'));
+        .catch(error => this.failure(error));
     }
 
     onSubmit()
@@ -70,17 +73,28 @@ export class AddressAddEditComponent {
                     this.addressId = result as number;
                     this.address.id = this.addressId;
                     this.toastr.success('New address saved.', 'Success:')
-                    this.router.navigate(['/location-index']);
+                    if(!this.activeWalkThrough) {
+                        this.router.navigate(['/location-index']);
+                    }
+                    if(this.activeWalkThrough) {
+                        this.sendLocationId.emit(this.addressId)
+                    }
                 })
-                .catch(error => this.toastr.error(error, 'Error:'));
+                .catch(error => this.failure(error));
         } else {
             this.locationService.putAddress(this.address)
                 .then(result => {
                     this.toastr.success('Address edits saved.', 'Success:')
                     this.router.navigate(['/location-index']);
                 })
-                .catch(error => this.toastr.error(error, 'Error:'));
+                .catch(error => this.failure(error));
         }
+    }
+
+    failure(error: any)
+    {
+        var body = JSON.parse(error._body);
+        this.toastr.error(body.message, 'Error:')
     }
 
 }

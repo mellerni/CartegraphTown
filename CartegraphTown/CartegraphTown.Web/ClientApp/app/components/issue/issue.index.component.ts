@@ -26,7 +26,7 @@ export class IssueIndexComponent {
             this.issues = result as Issue[];
             this.loading = false;
         })
-        .catch(error => this.toastr.error(error, 'Error:'));
+        .catch(error => this.failure(error));
     }
 
     deleteIssue(issueId: number)
@@ -37,7 +37,13 @@ export class IssueIndexComponent {
                 this.loading = true;
                 this.getIssues();
             })
-            .catch(error => this.toastr.error(error, 'Error:'));
+            .catch(error => this.failure(error));
+    }
+
+    failure(error: any)
+    {
+        var body = JSON.parse(error._body);
+        this.toastr.error(body.message, 'Error:')
     }
 
 }

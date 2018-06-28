@@ -4,8 +4,9 @@ export class Issue {
   public issueTypeDescription: string = "";
   public issueTypeId: number = 0;
   public citizen: string = "";
-  public citizenId: number = 0;
+  public citizenId: number | undefined;
   public location: string = "";
+  public locationId: number | undefined;
   public details: string = "";
   public correctiveAction: string = "";
   public correctionDate: Date | undefined;

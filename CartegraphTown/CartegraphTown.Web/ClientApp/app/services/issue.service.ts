@@ -46,7 +46,7 @@ export class IssueService {
     }
 
     public delete(id: number) {
-        let apiURL = `${this.baseUrl}issue?locationId=${id}`;
+        let apiURL = `${this.baseUrl}issue?issueId=${id}`;
         return this.http.delete(apiURL)
             .map((response) => response.json())
             .toPromise()

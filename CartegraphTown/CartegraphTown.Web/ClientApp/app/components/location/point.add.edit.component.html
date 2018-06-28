@@ -36,7 +36,7 @@
                 <button type='submit' class='btn btn-primary btn-lg' [disabled]='!pointForm.form.valid'>
                     <span class="fa fa-save"></span>&nbsp;&nbsp;Save
                 </button>
-                <a class="btn btn-default btn-lg" role="button" [routerLink]="['/location-index']">
+                <a *ngIf="!activeWalkThrough" class="btn btn-default btn-lg" role="button" [routerLink]="['/location-index']">
                     <span class="fa fa-ban"></span>&nbsp;&nbsp;Cancel
                 </a>
             </div>

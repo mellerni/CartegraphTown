@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewContainerRef } from '@angular/core';
+import { Component, OnInit, Input, ViewContainerRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Issue } from '../../classes/issue';
 import { IssueType } from '../../classes/issue.type';
@@ -17,6 +17,9 @@ export class IssueAddEditComponent {
     public loading: boolean = true;
     public loadingTypes: boolean = true;
     public title = 'Add Issue';
+    @Input() activeWalkThrough: boolean = false;
+    @Input() walkThroughCitizenId : number | undefined;
+    @Input() walkThroughLocationId : number | undefined;
 
     constructor(private issueService: IssueService,
                 private activeRoute: ActivatedRoute,
@@ -45,7 +48,7 @@ export class IssueAddEditComponent {
                 this.issue = result as Issue;
                 this.loading = false;
             })
-            .catch(error => this.toastr.error(error, 'Error:'));
+            .catch(error => this.failure(error));
         } else {
             this.loading = false;
         }
@@ -58,11 +61,21 @@ export class IssueAddEditComponent {
             this.issueTypes = result as IssueType[];
             this.loadingTypes = false;
         })
-        .catch(error => this.toastr.error(error, 'Error:'));
+        .catch(error => this.failure(error));
     }
 
     onSubmit()
     {
+        if (this.walkThroughCitizenId && this.walkThroughLocationId){
+            this.issue.citizenId = this.walkThroughCitizenId;
+            this.issue.locationId = this.walkThroughLocationId;
+        }
+
+        if (!this.issue.citizenId || !this.issue.locationId){
+            this.toastr.error('Missing location or citizen. Can not save', 'Error:');
+            return;
+        }
+
         if(this.issue.id === 0){
             this.issueService.post(this.issue)
                 .then(result => {
@@ -71,15 +84,21 @@ export class IssueAddEditComponent {
                     this.toastr.success('New issue saved.', 'Success:')
                     this.router.navigate(['/issue-index']);
                 })
-                .catch(error => this.toastr.error(error, 'Error:'));
+                .catch(error => this.failure(error));
         } else {
             this.issueService.put(this.issue)
                 .then(result => {
                     this.toastr.success('Issue edits saved.', 'Success:')
                     this.router.navigate(['/issue-index']);
                 })
-                .catch(error => this.toastr.error(error, 'Error:'));
+                .catch(error => this.failure(error));
         }
+    }
+
+    failure(error: any)
+    {
+        var body = JSON.parse(error._body);
+        this.toastr.error(body.message, 'Error:')
     }
 
 }

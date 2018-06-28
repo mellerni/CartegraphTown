@@ -27,7 +27,8 @@ export class CitizenIndexComponent {
             this.citizens = result as Citizen[];
             this.loading = false;
         })
-        .catch(error => this.toastr.error(error, 'Error:'));
+        .catch(error => this.failure(error));
+
     }
 
     deleteCitizen(citizenId: number)
@@ -38,7 +39,13 @@ export class CitizenIndexComponent {
                 this.loading = true;
                 this.getCitizens();
             })
-            .catch(error => this.toastr.error(error, 'Error:'));
+            .catch(error => this.failure(error));
+    }
+
+    failure(error: any)
+    {
+        var body = JSON.parse(error._body);
+        this.toastr.error(body.message, 'Error:')
     }
 
 }

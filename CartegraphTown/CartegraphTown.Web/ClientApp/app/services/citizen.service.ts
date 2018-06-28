@@ -10,6 +10,13 @@ export class CitizenService {
 
    constructor(private http: Http) {}
 
+   public getTypeAhead() {
+    let apiURL = `${this.baseUrl}citizen/getTypeAhead`;
+    return this.http.get(apiURL)
+      .map((response) => response.json())
+      .toPromise()
+    }
+
    public getAll() {
         let apiURL = `${this.baseUrl}citizen/getAll`;
         return this.http.get(apiURL)
@@ -30,6 +37,14 @@ export class CitizenService {
           .map((response) => response.json())
           .toPromise()
         }
+
+    public addLocation(citizenId: number, locationId: number) {
+        let apiURL = `${this.baseUrl}citizen/addLocation/` + citizenId +  '/' + locationId;
+        return this.http.put(apiURL, null)
+            .map((response) => response.json())
+            .toPromise()
+        }
+
 
     public put(citizen: Citizen) {
         let apiURL = `${this.baseUrl}citizen`;

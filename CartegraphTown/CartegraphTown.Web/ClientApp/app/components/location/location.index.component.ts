@@ -30,7 +30,7 @@ export class LocationIndexComponent {
             this.addresses = result as Address[];
             this.loadingAddresses = false;
         })
-        .catch(error => this.toastr.error(error, 'Error:'));
+        .catch(error => this.failure(error));
     }
 
     getPoints()
@@ -40,7 +40,7 @@ export class LocationIndexComponent {
             this.points = result as Point[];
             this.loadingPoints = false;
         })
-        .catch(error => this.toastr.error(error, 'Error:'));
+        .catch(error => this.failure(error));
     }
 
     deletePoint(locationId: number)
@@ -52,7 +52,7 @@ export class LocationIndexComponent {
                 this.getAddresses();
                 this.getPoints()
             })
-            .catch(error => this.toastr.error(error, 'Error:'));
+            .catch(error => this.failure(error));
     }
 
     deleteAddress(locationId: number)
@@ -64,7 +64,13 @@ export class LocationIndexComponent {
                 this.getAddresses();
                 this.getPoints()
             })
-            .catch(error => this.toastr.error(error, 'Error:'));
+            .catch(error => this.failure(error));
+    }
+
+    failure(error: any)
+    {
+        var body = JSON.parse(error._body);
+        this.toastr.error(body.message, 'Error:')
     }
 
 }

@@ -4,4 +4,47 @@
         <em>Loading...</em>
     </p>
 
+    <div *ngIf="!loading">
+        <h3>{{activeStep}}</h3>
+
+        {{this.activeStepId}}
+
+        <citizen-add-edit *ngIf="activeStepId === 1" [activeWalkThrough]="true" (sendCitizenId)="receiveCitizenId($event)"></citizen-add-edit>
+
+        <address-add-edit *ngIf="activeStepId === 2" [activeWalkThrough]="true" (sendLocationId)="receiveLocationId($event)"></address-add-edit>
+
+        <div *ngIf="activeStepId === 3" class="container">
+            <div class="row">
+                <div class="col-sm-text-center">
+                    <button type='button' class='btn btn-primary btn-lg' (click)='setLocationMatch(true)'>
+                        <span class="fa fa-check"></span>&nbsp;&nbsp;Yes
+                    </button>
+                    <button type='button' class='btn btn-primary btn-lg' (click)='setLocationMatch(false)'>
+                        <span class="fa fa-times"></span>&nbsp;&nbsp;No
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div *ngIf="activeStepId === 4" class="container">
+                <div class="row">
+                    <div class="col-sm-text-center">
+                        <button type='button' class='btn btn-primary btn-lg' (click)='setLocationType(false)'>
+                            <span class="fa fa-map-marked-alt"></span>&nbsp;&nbsp;Address
+                        </button>
+                        <button type='button' class='btn btn-primary btn-lg' (click)='setLocationType(true)'>
+                            <span class="fa fa-map-pin"></span>&nbsp;&nbsp;GPS Point
+                        </button>
+                    </div>
+                </div>
+        </div>
+
+        <address-add-edit *ngIf="activeStepId === 5 && !locationTypeIsPoint" [activeWalkThrough]="true" (sendLocationId)="receiveLocationId($event)"></address-add-edit>
+
+        <point-add-edit *ngIf="activeStepId === 5 && locationTypeIsPoint" [activeWalkThrough]="true" (sendLocationId)="receiveLocationId($event)"></point-add-edit>
+
+        <issue-add-edit *ngIf="activeStepId === 6" [activeWalkThrough]="true"
+            [walkThroughCitizenId]="citizenId" [walkThroughLocationId]="issueLocationId"></issue-add-edit>
+    </div>
+
 </div>

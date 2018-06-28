@@ -14,6 +14,7 @@ import { IssueService } from './services/issue.service';
 
 import { IssueIndexComponent } from './components/issue/issue.index.component';
 import { IssueAddEditComponent } from './components/issue/issue.add.edit.component';
+import { IssueWalkThroughComponent } from './components/issue/issue.walk.through.component';
 
 import { CitizenIndexComponent } from './components/citizen/citizen.index.component';
 import { CitizenAddEditComponent } from './components/citizen/citizen.add.edit.component';
@@ -29,6 +30,7 @@ import { PointAddEditComponent } from './components/location/point.add.edit.comp
         NavMenuComponent,
         IssueIndexComponent,
         IssueAddEditComponent,
+        IssueWalkThroughComponent,
         CitizenIndexComponent,
         CitizenAddEditComponent,
         LocationIndexComponent,
@@ -44,7 +46,7 @@ import { PointAddEditComponent } from './components/location/point.add.edit.comp
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: HomeComponent },
             { path: 'issue-index', component: IssueIndexComponent },
-            { path: 'issue-add', component: IssueAddEditComponent },
+            { path: 'issue-add', component: IssueWalkThroughComponent },
             { path: 'issue-edit/:id', component: IssueAddEditComponent},
             { path: 'citizen-index', component: CitizenIndexComponent },
             { path: 'citizen-add', component: CitizenAddEditComponent },

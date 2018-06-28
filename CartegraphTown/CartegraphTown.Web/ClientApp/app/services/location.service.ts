@@ -18,6 +18,13 @@ export class LocationService {
             .toPromise()
     }
 
+    public getTypeAhead() {
+        let apiURL = `${this.baseUrl}location/getTypeAhead`;
+        return this.http.get(apiURL)
+          .map((response) => response.json())
+          .toPromise()
+    }
+
     public getAllAddresses() {
         let apiURL = `${this.baseUrl}location/getAllAddresses`;
         return this.http.get(apiURL)
