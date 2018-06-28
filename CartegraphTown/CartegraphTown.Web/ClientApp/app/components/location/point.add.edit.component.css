@@ -1,0 +1,13 @@
+@media  only screen and (max-width: 768px) {
+    /* On small screens, hide table and show warning*/
+    .col-sm-text-center {
+        text-align: center;
+    }
+}
+
+@media  only screen and (min-width: 768px) {
+    /* On small screens, hide table and show warning*/
+    .col-sm-text-center {
+        padding: 0 15px 0 15px;
+    }
+}
