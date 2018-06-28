@@ -7,8 +7,6 @@
     <div *ngIf="!loading">
         <h3>{{activeStep}}</h3>
 
-        {{this.activeStepId}}
-
         <citizen-add-edit *ngIf="activeStepId === 1" [activeWalkThrough]="true" (sendCitizenId)="receiveCitizenId($event)"></citizen-add-edit>
 
         <address-add-edit *ngIf="activeStepId === 2" [activeWalkThrough]="true" (sendLocationId)="receiveLocationId($event)"></address-add-edit>
