@@ -19,6 +19,17 @@
                 </li>
                 <hr/>
                 <li [routerLinkActive]="['link-active']">
+                    <a [routerLink]="['/issue-index']">
+                        <span class='fa fa-clipboard-list'></span>&nbsp;&nbsp;&nbsp;Issue List
+                    </a>
+                </li>
+                <li [routerLinkActive]="['link-active']">
+                        <a [routerLink]="['/issue-add']">
+                            <span class='fa fa-exclamation'></span>&nbsp;&nbsp;&nbsp;Add Issue
+                        </a>
+                    </li>
+                <hr/>
+                <li [routerLinkActive]="['link-active']">
                     <a [routerLink]="['/citizen-index']">
                         <span class='fa fa-users'></span>&nbsp;&nbsp;Citizen List
                     </a>
@@ -40,14 +51,8 @@
                     </a>
                 </li>
                 <li [routerLinkActive]="['link-active']">
-                        <a [routerLink]="['/point-add']">
-                            <span class='fa fa-map-pin'></span>&nbsp;&nbsp;Add Point
-                        </a>
-                </li>
-                <hr/>
-                <li [routerLinkActive]="['link-active']">
-                    <a [routerLink]="['/fetch-data']">
-                        <span class='fa fa-exclamation'></span>&nbsp;&nbsp;&nbsp;Issue
+                    <a [routerLink]="['/point-add']">
+                        <span class='fa fa-map-pin'></span>&nbsp;&nbsp;Add Point
                     </a>
                 </li>
             </ul>

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule, Title } from '@angular/platform-browser';
-import { FormsModule }   from '@angular/forms';
+import { FormsModule  }   from '@angular/forms';
 import { AppModuleShared } from './app.shared.module';
 import { AppComponent } from './components/app/app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';

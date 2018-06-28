@@ -45,7 +45,7 @@
                         <td>{{ citizen.email }}</td>
                         <td>{{ citizen.phone }}</td>
                         <td [routerLinkActive]="['link-active']">
-                            <a class="btn btn-default btn-md" role="button" [routerLink]="['/citizen-edit/' + citizen.id]">
+                            <a class="btn btn-default btn-sm" role="button" [routerLink]="['/citizen-edit/' + citizen.id]">
                                 <span class="fa fa-user-edit"></span>&nbsp;&nbsp;Edit
                             </a>
                             <button class="btn btn-sm btn-danger" (click)="deleteCitizen(citizen.id)">

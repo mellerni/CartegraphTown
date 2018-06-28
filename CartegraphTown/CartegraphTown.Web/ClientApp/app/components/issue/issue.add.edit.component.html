@@ -1,0 +1,68 @@
+<div class='container'>
+    <h1>{{title}}</h1>
+    <p *ngIf="loading">
+        <em>Loading...</em>
+    </p>
+    <form *ngIf="!loading" (ngSubmit)='onSubmit()' #issueForm='ngForm'>
+        <div class="row">
+            <div class='form-group col-sm-12'>
+                <label for='issueTypeId'>Type</label>
+                <div *ngIf="!loadingTypes && issueTypes">
+                    <select class="select-match" name='issueTypeId' [(ngModel)]="issue.issueTypeId" required #issueTypeId="ngModel">
+                        <option *ngFor="let issueType of issueTypes" [value]="issueType.id" [attr.selected]="issue.issueTypeId === issueType.id ? true : null">
+                            {{ issueType.type }}
+                        </option>
+                    </select>
+                    <div *ngIf='(issueTypeId.dirty || issueTypeId.touched) && (!issue.issueTypeId || issue.issueTypeId === 0)' class='alert alert-danger'>
+                        <div>
+                            Type is required
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="loadingTypes || !issueTypes">
+                    <p>
+                        <em>Loading types ...</em>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class='form-group col-sm-12'>
+                <label for='details'>Details</label>
+                <textarea type='text' class='form-control' name='details' rows="4" placeholder='Please provide some details about the issue ...' required
+                    [(ngModel)]='issue.details' #details="ngModel"></textarea>
+                <div *ngIf='details.invalid && (details.dirty || details.touched)' class='alert alert-danger'>
+                    <div *ngIf='details.errors?.required'>
+                        Details are required
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class='form-group col-sm-12'>
+                <label for='correctiveAction'>Corrective Action</label>
+                <textarea type='text' class='form-control' name='correctiveAction' rows="4" placeholder='Please provide some corrective Action about the issue ...'
+                    [(ngModel)]='issue.correctiveAction' #correctiveAction="ngModel"></textarea>
+            </div>
+            <div class='form-group col-sm-12'>
+                    <div class="alert alert-warning" role="alert">
+                            <strong>Warning:</strong> If you update the corrective action text the issue is considered resolved. A corrective
+                            action date will be assigned.
+                    </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-text-center">
+                <button type='submit' class='btn btn-primary btn-lg' [disabled]='!issueForm.form.valid || !issue.issueTypeId || issue.issueTypeId === 0'>
+                    <span class="fa fa-save"></span>&nbsp;&nbsp;Save
+                </button>
+                <a class="btn btn-default btn-lg" role="button" [routerLink]="['/issue-index']">
+                    <span class="fa fa-ban"></span>&nbsp;&nbsp;Cancel
+                </a>
+            </div>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,64 @@
+<div class='container'>
+    <div>
+        <div class="row">
+            <div class="col-sm-12">
+                <h1 class="pull-left">Issue List</h1>
+                <a class="btn btn-default btn-lg pull-right margin-top-20" role="button" [routerLink]="['/issue-add']">
+                    <span class="fa fa-exclamation"></span>&nbsp;&nbsp;Add Issue
+                </a>
+            </div>
+        </div>
+        <div class="row">
+            <p *ngIf="loading">
+                <em>Loading...</em>
+            </p>
+            <p *ngIf="issues && issues.length === 0">
+                <em>No issues found.</em>
+            </p>
+            <div class="table-responsive hide-on-phone">
+                <table class="table table-striped table-hover table-responsive" *ngIf="issues && issues.length > 0">
+                    <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Citizen</th>
+                            <th>Location</th>
+                            <th>Created Date</th>
+                            <th>Correction Date</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let issue of issues">
+                            <td>{{ issue.issueTypeDescription }}</td>
+                            <td>{{ issue.citizen }}</td>
+                            <td>{{ issue.location }}</td>
+                            <td>{{ issue.createdDate | date:'short' }}</td>
+                            <td>{{ issue.correctionDate | date:'short' }}</td>
+                            <td [routerLinkActive]="['link-active']">
+                                <a class="btn btn-default btn-sm" role="button" [routerLink]="['/issue-edit/' + issue.id]">
+                                    <span class="fa fa-pen"></span>&nbsp;&nbsp;Edit
+                                </a>
+                                <button class="btn btn-sm btn-danger" (click)="deleteIssue(issue.id)" data-toggle="tooltip">
+                                    <span class="fa fa-trash"></span>&nbsp;&nbsp;Delete
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="show-on-phone" *ngIf="issues && issues.length > 0">
+            <p>
+                <em>Records found!</em>
+                <br/>
+                <em>However the width of your device to small to display the table.</em>
+                <br/>
+                <em>Try a different orientation or device. 700 px display is required</em>
+            </p>
+        </div>
+    </div>
+
+</div>
