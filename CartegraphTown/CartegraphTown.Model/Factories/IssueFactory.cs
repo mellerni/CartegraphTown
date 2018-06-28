@@ -2,7 +2,6 @@
 {
     using DTO;
     using Entity;
-    using Enum;
     using Helpers;
 
     public static class IssueFactory
@@ -18,10 +17,11 @@
             {
                 Id = entity.Id,
                 IssueTypeDescription = entity.IssueType.GetDescription(),
-                IssueType = entity.IssueType,
+                IssueTypeId = entity.IssueType,
                 CitizenId = entity.Citizen?.Id ?? 0,
                 Citizen = entity.Citizen?.FullName,
                 LocationId = entity.Location?.Id ?? 0,
+                Location = entity.Location?.GetLocationDescription(),
                 Details = entity.Details,
                 CorrectiveAction = entity.CorrectiveAction,
                 CorrectionDate = entity.CorrectionDate,

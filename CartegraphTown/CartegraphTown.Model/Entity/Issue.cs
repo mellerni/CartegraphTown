@@ -15,7 +15,7 @@
         public Issue(IssueDto model)
         {
             this.Validate(model);
-            this.IssueType = model.IssueType;
+            this.IssueType = model.IssueTypeId;
             this.Details = model.Details;
         }
 
@@ -69,7 +69,7 @@
         public void Update(IssueDto model)
         {
             this.Validate(model);
-            this.IssueType = model.IssueType;
+            this.IssueType = model.IssueTypeId;
             this.Details = model.Details;
 
             if (!string.IsNullOrWhiteSpace(model.CorrectiveAction))
@@ -90,7 +90,7 @@
                 throw new ArgumentException("Citizen reporting the issue is required.");
             }
 
-            if (model.IssueType == IssueType.None)
+            if (model.IssueTypeId == IssueType.None)
             {
                 throw new ArgumentException("IssueType is required.");
             }

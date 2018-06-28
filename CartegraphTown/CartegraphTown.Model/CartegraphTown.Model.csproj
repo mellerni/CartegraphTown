@@ -53,6 +53,7 @@
     <Compile Include="DTO\CitizenDto.cs" />
     <Compile Include="DTO\Common\Result.cs" />
     <Compile Include="DTO\Common\ResultBase.cs" />
+    <Compile Include="DTO\IssueTypeDto.cs" />
     <Compile Include="DTO\StateDto.cs" />
     <Compile Include="DTO\PointDto.cs" />
     <Compile Include="Entity\Base\Implementations\EntityBase.cs" />

@@ -18,7 +18,7 @@
         /// <summary>
         /// Type of issue
         /// </summary>
-        public IssueType IssueType { get; set; }
+        public IssueType IssueTypeId { get; set; }
 
 
         /// <summary>
@@ -30,6 +30,11 @@
         /// Citizen's id reporting the issue
         /// </summary>
         public int CitizenId { get; set; }
+
+        /// <summary>
+        /// Short location description
+        /// </summary>
+        public string Location { get; set; }
 
         /// <summary>
         /// Location id where the issue occurred

@@ -11,7 +11,9 @@
     using Model.DTO;
     using Model.DTO.Common;
     using Model.Entity;
+    using Model.Enum;
     using Model.Factories;
+    using Model.Helpers;
     using Serilog;
 
     public class IssueService : ServiceBase, IIssueService
@@ -30,7 +32,10 @@
         {
             try
             {
-                var issue = await this.Db.Issues.SingleOrDefaultAsync(x => x.Id == id);
+                var issue = await this.Db.Issues
+                    .Include(x => x.Location)
+                    .Include(x => x.Citizen)
+                    .SingleOrDefaultAsync(x => x.Id == id);
                 if (issue == null)
                 {
                     return Result<IssueDto>.Failure("Issue not found.");
@@ -46,6 +51,29 @@
         }
 
         /// <summary>
+        /// Retrieves all issue types for a drop down.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public Result<IEnumerable<IssueTypeDto>> GetAllIssueTypes()
+        {
+            try
+            {
+                var issueTypeDtos = new List<IssueTypeDto>();
+                foreach (IssueType issueType in (IssueType[])Enum.GetValues(typeof(IssueType)))
+                {
+                    issueTypeDtos.Add(new IssueTypeDto(){ Id = (int)issueType, Type = issueType.GetDescription()});
+                }
+                return Result<IEnumerable<IssueTypeDto>>.Success(issueTypeDtos);
+            }
+            catch (Exception exception)
+            {
+                Log.Logger.Error(exception, "Error in Get All Issues Types method.");
+                return Result<IEnumerable<IssueTypeDto>>.Failure("Error in Get All Issue Types method.");
+            }
+        }
+
+        /// <summary>
         /// Retrieves all issue.
         /// </summary>
         /// <param name="id"></param>
@@ -55,7 +83,10 @@
             try
             {
                 // TODO: Add filtering
-                var issues = await this.Db.Issues.ToListAsync();
+                var issues = await this.Db.Issues
+                    .Include(x => x.Location)
+                    .Include(x => x.Citizen)
+                    .ToListAsync();
                 var issuesDtos = issues.Select(IssueFactory.Create);
                 return Result<IEnumerable<IssueDto>>.Success(issuesDtos);
             }

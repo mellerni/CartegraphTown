@@ -22,6 +22,13 @@ namespace CartegraphTown.Service.Interfaces
         Task<Result<IEnumerable<IssueDto>>> GetAllIssuesAsync();
 
         /// <summary>
+        /// Retrieves all issue types for a drop down.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        Result<IEnumerable<IssueTypeDto>> GetAllIssueTypes();
+
+        /// <summary>
         /// Creates new issue.
         /// </summary>
         /// <param name="model"></param>

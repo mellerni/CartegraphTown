@@ -18,6 +18,14 @@
         private IIssueService Service { get; set; }
 
         [HttpGet]
+        [ResponseType(typeof(IssueTypeDto))]
+        [Route("getTypes")]
+        public IHttpActionResult GetTypes()
+        {
+            return this.ProcessResult(this.Service.GetAllIssueTypes());
+        }
+
+        [HttpGet]
         [ResponseType(typeof(IssueDto))]
         [Route("getAll")]
         public async Task<IHttpActionResult> GetAll()
