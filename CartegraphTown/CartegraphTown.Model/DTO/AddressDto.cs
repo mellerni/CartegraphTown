@@ -48,5 +48,15 @@
         /// Lat and Long of address
         /// </summary>
         public PointDto Point { get; set; }
+
+        /// <summary>
+        /// True if one or more citizens is at that location
+        /// </summary>
+        public bool IsCitizenLocation { get; set; }
+
+        /// <summary>
+        /// Number of issues at location
+        /// </summary>
+        public int IssueCount { get; set; }
     }
 }
