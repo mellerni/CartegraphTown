@@ -49,7 +49,8 @@ export class LocationIndexComponent {
             .then(result => {
                 this.toastr.success('Point deleted.')
                 this.loadingPoints = true;
-                this.getPoints();
+                this.getAddresses();
+                this.getPoints()
             })
             .catch(error => this.toastr.error(error, 'Error:'));
     }
@@ -61,6 +62,7 @@ export class LocationIndexComponent {
                 this.toastr.success('Address deleted.')
                 this.loadingAddresses = true;
                 this.getAddresses();
+                this.getPoints()
             })
             .catch(error => this.toastr.error(error, 'Error:'));
     }

@@ -4,6 +4,7 @@ import { Address } from '../../classes/address';
 import { State } from '../../classes/state';
 import { LocationService } from '../../services/location.service';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { Point } from '../../classes/point';
 
 @Component({
     selector: 'address-add-edit',

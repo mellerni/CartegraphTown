@@ -44,14 +44,16 @@
                             {{ state.abbreviation }}
                         </option>
                     </select>
-                    <div *ngIf='stateId.invalid && (stateId.dirty || stateId.touched)' class='alert alert-danger'>
-                        <div *ngIf='stateId.errors?.required'>
+                    <div *ngIf='(stateId.dirty || stateId.touched) && (!address.stateId || address.stateId === 0)' class='alert alert-danger'>
+                        <div>
                             State is required
                         </div>
                     </div>
                 </div>
                 <div *ngIf="loadingStates || !states">
-                    <p><em>Loading states ...</em></p>
+                    <p>
+                        <em>Loading states ...</em>
+                    </p>
                 </div>
 
             </div>
@@ -74,8 +76,8 @@
         <div class="row">
             <div class='form-group col-md-6 col-sm-12'>
                 <label for='latitude'>Latitude</label>
-                <input type='text' class='form-control' id='latitude' name='latitude' placeholder='50.0000' [(ngModel)]='address.point.latitude'
-                    #latitude="ngModel" pattern='(\d{2})[.](\d{4})$' />
+                <input type='text' class='form-control' name='latitude' placeholder='50.0000' [(ngModel)]='address.point.latitude' #latitude="ngModel"
+                    pattern='(\d{2})[.](\d{4})$' />
                 <div *ngIf='latitude.invalid && (latitude.dirty || latitude.touched)' class='alert alert-danger'>
                     <div *ngIf='latitude.errors?.pattern && latitude.touched'>
                         This is not a valid latitude. Requires at lease 4 digits of precision [50.0000].
@@ -85,10 +87,10 @@
 
             <div class='form-group col-md-6 col-sm-12'>
                 <label for='longitude'>Longitude</label>
-                <input type='text' class='form-control' id='longitude' name='longitude' placeholder='100.0000' [(ngModel)]='address.point.longitude'
-                    #longitude="ngModel" />
-                
-                    <!-- pattern='(\d)(\d)[\.](\d{4})$' />
+                <input type='text' class='form-control' name='longitude' placeholder='100.0000' [(ngModel)]='address.point.longitude' #longitude="ngModel"
+                />
+
+                <!-- pattern='(\d)(\d)[\.](\d{4})$' />
                 <div *ngIf='longitude.invalid && (longitude.dirty || longitude.touched)' class='alert alert-danger'>
                     <div *ngIf='longitude.errors?.pattern && longitude.touched'>
                         This is not a valid longitude. Requires at lease 4 digits of precision [100.0000].
@@ -100,10 +102,10 @@
 
         <div class="row">
             <div class="col-sm-text-center">
-                <button type='submit' class='btn btn-primary btn-lg' [disabled]='!addressForm.form.valid'>
+                <button type='submit' class='btn btn-primary btn-lg' [disabled]='!addressForm.form.valid || !address.stateId || address.stateId === 0'>
                     <span class="fa fa-save"></span>&nbsp;&nbsp;Save
                 </button>
-                <a class="btn btn-default btn-lg" role="button" [routerLink]="['/address-index']">
+                <a class="btn btn-default btn-lg" role="button" [routerLink]="['/location-index']">
                     <span class="fa fa-ban"></span>&nbsp;&nbsp;Cancel
                 </a>
             </div>

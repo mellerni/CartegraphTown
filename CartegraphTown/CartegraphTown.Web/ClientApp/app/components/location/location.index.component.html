@@ -26,7 +26,7 @@
                             <th>Zip Code</th>
                             <th>Latitude</th>
                             <th>Longitude</th>
-                            <th>Citizen Count</th>
+                            <th>Citizen's Location</th>
                             <th>Issue Count</th>
                             <th>Actions</th>
                         </tr>
@@ -37,16 +37,17 @@
                             <td>{{ address.address2 }}</td>
                             <td>{{ address.city }}</td>
                             <td>{{ address.state }}</td>
-                            <td>{{ address.point.latitude }}</td>
-                            <td>{{ address.point.longitude }}</td>
-                            <td>{{ address.citizenCount }}</td>
+                            <td>{{ address.zipCode }}</td>
+                            <td>{{ address.point.latitude | number : '1.4-4' }}</td>
+                            <td>{{ address.point.longitude | number : '1.4-4' }}</td>
+                            <td>{{ address.isCitizenLocation }}</td>
                             <td>{{ address.issueCount }}</td>
                             <td [routerLinkActive]="['link-active']">
-                                <a class="btn btn-default btn-md" role="button" [routerLink]="['/address-edit/' + address.id]">
+                                <a class="btn btn-default btn-sm" role="button" [routerLink]="['/address-edit/' + address.id]">
                                     <span class="fa fa-pen"></span>&nbsp;&nbsp;Edit
                                 </a>
-                                <button class="btn btn-sm btn-danger" (click)="deleteAddress(address.id)" [disabled]="address.issueCount > 0" data-toggle="tooltip"
-                                    data-placement="top" title="Can not be deleted if issues are present.">
+                                <button class="btn btn-sm btn-danger" (click)="deleteAddress(address.id)" [disabled]="address.issueCount > 0 || address.isCitizenLocation" data-toggle="tooltip"
+                                    data-placement="top" title="Can not be deleted if issues are present or a citizen's address.">
                                     <span class="fa fa-trash"></span>&nbsp;&nbsp;Delete
                                 </button>
                             </td>
@@ -79,23 +80,23 @@
                         <tr>
                             <th>Latitude</th>
                             <th>Longitude</th>
-                            <th>Citizen Count</th>
+                            <th>Citizen's Location</th>
                             <th>Issue Count</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr *ngFor="let point of points">
-                            <td>{{ point.latitude }}</td>
-                            <td>{{ point.longitude }}</td>
-                            <td>{{ point.citizenCount }}</td>
+                            <td>{{ point.latitude | number : '1.4-4' }}</td>
+                            <td>{{ point.longitude | number : '1.4-4' }}</td>
+                            <td>{{ point.isCitizenLocation }}</td>
                             <td>{{ point.issueCount }}</td>
                             <td [routerLinkActive]="['link-active']">
-                                <a class="btn btn-default btn-md" role="button" [routerLink]="['/point-edit/' + point.id]">
+                                <a class="btn btn-default btn-sm" role="button" [routerLink]="['/point-edit/' + point.id]">
                                     <span class="fa fa-pen"></span>&nbsp;&nbsp;Edit
                                 </a>
-                                <button class="btn btn-sm btn-danger" (click)="deletePoint(point.id)" [disabled]="point.issueCount > 0" data-toggle="tooltip"
-                                    data-placement="top" title="Can not be deleted if issues are present.">
+                                <button class="btn btn-sm btn-danger" (click)="deletePoint(point.id)" [disabled]="point.issueCount > 0 || point.isCitizenLocation" data-toggle="tooltip"
+                                    data-placement="top" title="Can not be deleted if issues are present or a citizen's address.">
                                     <span class="fa fa-trash"></span>&nbsp;&nbsp;Delete
                                 </button>
                             </td>
