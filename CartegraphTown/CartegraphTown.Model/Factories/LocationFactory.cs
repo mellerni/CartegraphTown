@@ -1,5 +1,6 @@
 ﻿namespace CartegraphTown.Model.Factories
 {
+    using System.Linq;
     using DTO;
     using Entity;
 
@@ -12,6 +13,8 @@
                 return null;
             }
 
+            var isCitizenLocation = entity.Citizens.Any();
+            var issueCount = entity.Issues.Count();
             var address = new AddressDto()
             {
                 Id = entity.Id,
@@ -21,10 +24,12 @@
                 State = entity.State?.Abbreviation,
                 StateId = entity.State?.Id ?? 0,
                 ZipCode = entity.ZipCode,
-                CreatedDate = entity.CreatedDate
+                CreatedDate = entity.CreatedDate,
+                IsCitizenLocation = isCitizenLocation,
+                IssueCount = issueCount
             };
 
-            address.Point = Point(entity);
+            address.Point = Point(entity) ?? new PointDto();
 
             return address;
         }
@@ -38,10 +43,15 @@
 
             if (entity.Latitude != null && entity.Longitude != null)
             {
+                var isCitizenLocation = entity.Citizens.Any();
+                var issueCount = entity.Issues.Count();
                 return new PointDto()
                 {
+                    Id = entity.Id,
                     Latitude = entity.Latitude ?? default(float),
-                    Longitude = entity.Longitude ?? default(float)
+                    Longitude = entity.Longitude ?? default(float),
+                    IsCitizenLocation = isCitizenLocation,
+                    IssueCount = issueCount
                 };
             }
 

@@ -63,12 +63,12 @@
         /// <summary>
         /// Latitude of location
         /// </summary>
-        public float? Latitude { get; set; }
+        public double? Latitude { get; set; }
 
         /// <summary>
         /// Longitude of location
         /// </summary>
-        public float? Longitude { get; set; }
+        public double? Longitude { get; set; }
 
         /// <summary>
         /// State of location
@@ -84,6 +84,16 @@
         /// Collection of citizens
         /// </summary>
         public virtual ICollection<Citizen> Citizens { get; set; }
+
+        public string GetLocationDescription()
+        {
+            if (this.StateId.HasValue)
+            {
+                return $"Address: {this.Address1} {this.Address2} {this.City}, {this.State.Abbreviation} {this.ZipCode}";
+            }
+
+            return $"Point: [ Lat: {this.Latitude} Long: {this.Longitude} ]";
+        }
 
         public void Update(AddressDto model)
         {
@@ -147,18 +157,6 @@
             if (model.Longitude <= 50.0000 || model.Longitude >= 180.0000)
             {
                 throw new ArgumentException("Longitude is invalid.");
-            }
-
-            var latPrecision = model.Latitude.ToString(CultureInfo.InvariantCulture).Split('.')[1].Length;
-            if (latPrecision < 4)
-            {
-                throw new ArgumentException("Latitude is not precise enough. Please include 4 decimal places.");
-            }
-
-            var longPrecision = model.Longitude.ToString(CultureInfo.InvariantCulture).Split('.')[1].Length;
-            if (longPrecision < 4)
-            {
-                throw new ArgumentException("Longitude is not precise enough. Please include 4 decimal places.");
             }
         }
     }

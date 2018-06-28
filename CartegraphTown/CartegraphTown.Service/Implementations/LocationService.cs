@@ -29,7 +29,10 @@
         {
             try
             {
-                var location = await this.Db.Locations.SingleOrDefaultAsync(x => x.Id == id);
+                var location = await this.Db.Locations
+                    .Include(x => x.Issues)
+                    .Include(x => x.Citizens)
+                    .SingleOrDefaultAsync(x => x.Id == id);
                 if (location == null)
                 {
                     return Result<AddressDto>.Failure("Location not found.");
@@ -53,7 +56,10 @@
         {
             try
             {
-                var location = await this.Db.Locations.SingleOrDefaultAsync(x => x.Id == id);
+                var location = await this.Db.Locations
+                    .Include(x => x.Issues)
+                    .Include(x => x.Citizens)
+                    .SingleOrDefaultAsync(x => x.Id == id);
                 if (location == null)
                 {
                     return Result<PointDto>.Failure("Location not found.");
@@ -97,7 +103,10 @@
             try
             {
                 // TODO: Add filtering
-                var locations = await this.Db.Locations.Where(x => x.StateId.HasValue).ToListAsync();
+                var locations = await this.Db.Locations
+                    .Include(x => x.Issues)
+                    .Include(x => x.Citizens)
+                    .Where(x => x.StateId.HasValue).ToListAsync();
                 var addressDtos = locations.Select(LocationFactory.Address);
                 return Result<IEnumerable<AddressDto>>.Success(addressDtos);
             }
@@ -119,6 +128,8 @@
             {
                 // TODO: Add filtering
                 var locations = await this.Db.Locations
+                    .Include(x => x.Issues)
+                    .Include(x => x.Citizens)
                     .Where(x => x.Latitude.HasValue
                              && x.Longitude.HasValue)
                     .ToListAsync();
