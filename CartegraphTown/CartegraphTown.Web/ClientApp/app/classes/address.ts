@@ -9,6 +9,8 @@ export class Address {
   public state: string = "";
   public stateId: number | undefined;
   public zipCode: string = "";
+  public isCitizenLocation: boolean = true;
+  public issueCount: number = 0;
   public createdDate: Date = new Date();
 
   point: Point = new Point();
