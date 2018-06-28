@@ -21,6 +21,26 @@
         }
 
         /// <summary>
+        /// Get location type ahead
+        /// </summary>
+        /// <returns></returns>
+        public async Task<Result<IEnumerable<TypeAheadDto>>> GetLocationTypeAheadAsync()
+        {
+            try
+            {
+                var locations = await this.Db.Locations.ToListAsync();
+                var locationTypeAhead = locations.Select(LocationFactory.TypeAhead).OrderBy(x => x.Description).ToList();
+
+                return Result<IEnumerable<TypeAheadDto>>.Success(locationTypeAhead);
+            }
+            catch (Exception exception)
+            {
+                Log.Logger.Error(exception, "Error in Get Location Type Ahead method.");
+                return Result<IEnumerable<TypeAheadDto>>.Failure("Error in Get Location Type Ahead method.");
+            }
+        }
+
+        /// <summary>
         /// Retrieves single address location by id.
         /// </summary>
         /// <param name="id"></param>

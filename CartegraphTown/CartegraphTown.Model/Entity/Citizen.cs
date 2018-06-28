@@ -68,7 +68,7 @@
         /// </summary>
         public string GetTypeAhead()
         {
-            var typeAhead = "Name: " + this.FullName;
+            var typeAhead = "Name: " + this.FirstName + " " + this.LastName;
             if (this.Location?.Address1 != null)
             {
                 typeAhead += " - Address: " + this.Location.Address1;

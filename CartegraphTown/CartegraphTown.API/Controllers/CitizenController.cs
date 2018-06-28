@@ -5,6 +5,7 @@
     using System.Web.Http.Description;
     using System.Web.Http;
     using Model.DTO;
+    using Model.DTO.Common;
     using Service.Interfaces;
 
     [RoutePrefix("api/citizen")]
@@ -16,6 +17,14 @@
         }
 
         private ICitizenService Service { get; set; }
+
+        [HttpGet]
+        [ResponseType(typeof(IEnumerable<TypeAheadDto>))]
+        [Route("getTypeAhead")]
+        public async Task<IHttpActionResult> GetTypeAhead()
+        {
+            return this.ProcessResult(await this.Service.GetCitizenTypeAheadAsync());
+        }
 
         [HttpGet]
         [ResponseType(typeof(CitizenDto))]

@@ -2,6 +2,7 @@
 {
     using System.Linq;
     using DTO;
+    using DTO.Common;
     using Entity;
 
     public static class LocationFactory
@@ -69,6 +70,20 @@
             {
                 Id = entity.Id,
                 Abbreviation = entity.Abbreviation
+            };
+        }
+
+        public static TypeAheadDto TypeAhead(Location entity)
+        {
+            if (entity == null)
+            {
+                return null;
+            }
+
+            return new TypeAheadDto()
+            {
+                Id = entity.Id,
+                Description = entity.GetLocationDescription()
             };
         }
     }

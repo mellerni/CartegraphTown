@@ -21,6 +21,26 @@
         }
 
         /// <summary>
+        /// Get citizens type ahead
+        /// </summary>
+        /// <returns></returns>
+        public async Task<Result<IEnumerable<TypeAheadDto>>> GetCitizenTypeAheadAsync()
+        {
+            try
+            {
+                var citizens = await this.Db.Citizens.ToListAsync();
+                var citizenTypeAhead = citizens.Select(CitizenFactory.TypeAhead).ToList();
+
+                return Result<IEnumerable<TypeAheadDto>>.Success(citizenTypeAhead);
+            }
+            catch (Exception exception)
+            {
+                Log.Logger.Error(exception, "Error in Get Citizen Type Ahead method.");
+                return Result<IEnumerable<TypeAheadDto>>.Failure("Error in Get Citizen Type Ahead method.");
+            }
+        }
+
+        /// <summary>
         /// Retrieves single citizen by id.
         /// </summary>
         /// <param name="id"></param>

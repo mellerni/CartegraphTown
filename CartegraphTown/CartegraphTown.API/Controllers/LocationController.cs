@@ -5,6 +5,7 @@
     using System.Web.Http.Description;
     using System.Web.Http;
     using Model.DTO;
+    using Model.DTO.Common;
     using Service.Interfaces;
 
     [RoutePrefix("api/location")]
@@ -16,6 +17,14 @@
         }
 
         private ILocationService Service { get; set; }
+
+        [HttpGet]
+        [ResponseType(typeof(IEnumerable<TypeAheadDto>))]
+        [Route("getTypeAhead")]
+        public async Task<IHttpActionResult> GetTypeAhead()
+        {
+            return this.ProcessResult(await this.Service.GetLocationTypeAheadAsync());
+        }
 
         [HttpGet]
         [ResponseType(typeof(IEnumerable<AddressDto>))]

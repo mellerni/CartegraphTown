@@ -8,6 +8,12 @@ namespace CartegraphTown.Service.Interfaces
     public interface ILocationService
     {
         /// <summary>
+        /// Get location type ahead
+        /// </summary>
+        /// <returns></returns>
+        Task<Result<IEnumerable<TypeAheadDto>>> GetLocationTypeAheadAsync();
+
+        /// <summary>
         /// Retrieves all states for drop down.
         /// </summary>
         /// <returns></returns>

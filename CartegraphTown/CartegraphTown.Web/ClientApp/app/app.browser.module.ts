@@ -4,6 +4,7 @@ import { FormsModule  }   from '@angular/forms';
 import { AppModuleShared } from './app.shared.module';
 import { AppComponent } from './components/app/app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ToastModule } from 'ng2-toastr/ng2-toastr';
 
 
@@ -14,6 +15,7 @@ import { ToastModule } from 'ng2-toastr/ng2-toastr';
         FormsModule,
         AppModuleShared,
         BrowserAnimationsModule,
+        NgbModule.forRoot(),
         ToastModule.forRoot(),
     ],
     providers: [

@@ -8,6 +8,12 @@ namespace CartegraphTown.Service.Interfaces
     public interface ICitizenService
     {
         /// <summary>
+        /// Get citizens type ahead
+        /// </summary>
+        /// <returns></returns>
+        Task<Result<IEnumerable<TypeAheadDto>>> GetCitizenTypeAheadAsync();
+
+        /// <summary>
         /// Retrieves single citizen by id.
         /// </summary>
         /// <param name="id"></param>
