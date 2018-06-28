@@ -168,34 +168,34 @@
         /// </summary>
         /// <param name="model">AddressDto</param>
         /// <returns></returns>
-        public async Task<ResultBase> CreateAsync(AddressDto model)
+        public async Task<Result<int>> CreateAsync(AddressDto model)
         {
             try
             {
                 if (model == null)
                 {
-                    return ResultBase.Failure("Model is empty.");
+                    return Result<int>.Failure("Model is empty.");
                 }
 
                 var state = await this.Db.States.SingleOrDefaultAsync(x => x.Id == model.StateId);
                 if (state == null)
                 {
-                    return ResultBase.Failure("State not found. State is required to create a new address location.");
+                    return Result<int>.Failure("State not found. State is required to create a new address location.");
                 }
 
                 var location = new Location(model);
                 this.Db.Locations.Add(location);
                 await this.Db.SaveChangesAsync();
-                return ResultBase.Success();
+                return Result<int>.Success(location.Id);
             }
             catch (ArgumentException argumentException)
             {
-                return ResultBase.Failure(argumentException.Message);
+                return Result<int>.Failure(argumentException.Message);
             }
             catch (Exception exception)
             {
                 Log.Logger.Error(exception, "Error in Location Create Address method.");
-                return ResultBase.Failure($"Error in Location Create Address method.");
+                return Result<int>.Failure($"Error in Location Create Address method.");
             }
         }
 
@@ -204,28 +204,28 @@
         /// </summary>
         /// <param name="model">PointDto</param>
         /// <returns></returns>
-        public async Task<ResultBase> CreateAsync(PointDto model)
+        public async Task<Result<int>> CreateAsync(PointDto model)
         {
             try
             {
                 if (model == null)
                 {
-                    return ResultBase.Failure("Model is empty.");
+                    return Result<int>.Failure("Model is empty.");
                 }
 
                 var location = new Location(model);
                 this.Db.Locations.Add(location);
                 await this.Db.SaveChangesAsync();
-                return ResultBase.Success();
+                return Result<int>.Success(location.Id);
             }
             catch (ArgumentException argumentException)
             {
-                return ResultBase.Failure(argumentException.Message);
+                return Result<int>.Failure(argumentException.Message);
             }
             catch (Exception exception)
             {
                 Log.Logger.Error(exception, "Error in Location Create Point method.");
-                return ResultBase.Failure($"Error in Location Create Point method.");
+                return Result<int>.Failure($"Error in Location Create Point method.");
             }
         }
 

@@ -67,7 +67,7 @@
         }
 
         [HttpPost]
-        [ResponseType(typeof(string))]
+        [ResponseType(typeof(int))]
         [Route("postAddress")]
         public async Task<IHttpActionResult> Post([FromBody]AddressDto model)
         {
@@ -75,7 +75,7 @@
         }
 
         [HttpPost]
-        [ResponseType(typeof(string))]
+        [ResponseType(typeof(int))]
         [Route("postPoint")]
         public async Task<IHttpActionResult> Post([FromBody]PointDto model)
         {

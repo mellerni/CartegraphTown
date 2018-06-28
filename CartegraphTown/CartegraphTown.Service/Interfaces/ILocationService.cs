@@ -53,14 +53,14 @@ namespace CartegraphTown.Service.Interfaces
         /// </summary>
         /// <param name="model">AddressDto</param>
         /// <returns></returns>
-        Task<ResultBase> CreateAsync(AddressDto model);
+        Task<Result<int>> CreateAsync(AddressDto model);
 
         /// <summary>
         /// Creates new location from PointDto.
         /// </summary>
         /// <param name="model">PointDto</param>
         /// <returns></returns>
-        Task<ResultBase> CreateAsync(PointDto model);
+        Task<Result<int>> CreateAsync(PointDto model);
 
         /// <summary>
         /// Update existing location from AddressDto.
