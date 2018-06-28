@@ -35,6 +35,14 @@ namespace CartegraphTown.Service.Interfaces
         Task<Result<int>> CreateAsync(CitizenDto model);
 
         /// <summary>
+        /// Add location to existing citizen
+        /// </summary>
+        /// <param name="citizenId"></param>
+        /// <param name="locationId"></param>
+        /// <returns></returns>
+        Task<ResultBase> AddLocation(int citizenId, int locationId);
+
+        /// <summary>
         /// Update existing citizen.
         /// </summary>
         /// <param name="model"></param>

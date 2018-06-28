@@ -43,10 +43,18 @@
         }
 
         [HttpPost]
-        [ResponseType(typeof(string))]
+        [ResponseType(typeof(int))]
         public async Task<IHttpActionResult> Post([FromBody]CitizenDto model)
         {
             return this.ProcessResult(await this.Service.CreateAsync(model));
+        }
+
+        [HttpPut]
+        [ResponseType(typeof(string))]
+        [Route("addLocation/{citizenId:int}/{locationId:int}")]
+        public async Task<IHttpActionResult> AddLocation(int citizenId, int locationId)
+        {
+            return this.ProcessResult(await this.Service.AddLocation(citizenId, locationId));
         }
 
         [HttpPut]

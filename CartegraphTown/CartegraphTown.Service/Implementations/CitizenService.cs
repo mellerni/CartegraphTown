@@ -116,6 +116,40 @@
         }
 
         /// <summary>
+        /// Add location to existing citizen
+        /// </summary>
+        /// <param name="citizenId"></param>
+        /// <param name="locationId"></param>
+        /// <returns></returns>
+        public async Task<ResultBase> AddLocation(int citizenId, int locationId)
+        {
+            try
+            {
+                var citizen = await this.Db.Citizens.SingleOrDefaultAsync(x => x.Id == citizenId);
+                if (citizen == null)
+                {
+                    return ResultBase.Failure("Citizen not found.");
+                }
+
+                var location = await this.Db.Locations.SingleOrDefaultAsync(x => x.Id == locationId);
+                if (location == null)
+                {
+                    return ResultBase.Failure("Location not found.");
+                }
+                citizen.LocationId = location.Id;
+                await this.Db.SaveChangesAsync();
+
+                return ResultBase.Success();
+            }
+            catch (Exception exception)
+            {
+                Log.Logger.Error(exception, "Error in AddLocation method.");
+                return ResultBase.Failure("Error in AddLocation method.");
+            }
+        }
+
+
+        /// <summary>
         /// Update existing citizen.
         /// </summary>
         /// <param name="model"></param>
