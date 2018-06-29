@@ -8,25 +8,29 @@ I only tested in:
 
 1. Clone the repository
 
-2. Make sure you have Visual Studio 2017 Installed
-    Community edition should work if you can't get a Professional or Enterprise licence.
-    VS 2017 comes with Core and Node support.
+2. Make sure you have Visual Studio 2017 Installed <br />
+    <br />
+    Community edition should work if you can't get a Professional or Enterprise licence.<br />
+    VS 2017 comes with Core and Node support.<br />
 
-    *This project might build in VS 2015 with the Core SDKs install. I haven't tried it.
+    *This project might build in VS 2015 with the Core SDKs install. I haven't tried it.<br />
 
-3. Install the .Net Core 2 SDK if needed
-    https://www.microsoft.com/net/download/dotnet-core/sdk-2.1.4
+3. Install the .Net Core 2 SDK if needed<br />
+    <br />
+    https://www.microsoft.com/net/download/dotnet-core/sdk-2.1.4<br />
 
-4. Install C# dependencies
-    Open the solution file with Visual Studio 2017. [Your Repository Directory]\CartegraphTown\CartegraphTown\CartegraphTown.sln
-    Re-Build the entire solution. This installs the Nuget package dependencies.
+4. Install C# dependencies<br />
+    <br />
+    Open the solution file with Visual Studio 2017. [Your Repository Directory]\CartegraphTown\CartegraphTown\CartegraphTown.sln<br />
+    Re-Build the entire solution. This installs the Nuget package dependencies.<br />
 
-5. Install npm and node
-    Open you favorite terminal.
-    Change you directory to the web project. [Your Repository Directory]\CartegraphTown\CartegraphTown\CartegraphTown.Web
-    See if you have node already installed.
-     ``` $ node -v  ```
-     See if you have npm already installed.
+5. Install npm and node<br />
+    <br />
+    Open you favorite terminal.<br />
+    Change you directory to the web project. [Your Repository Directory]\CartegraphTown\CartegraphTown\CartegraphTown.Web<br />
+    See if you have node already installed.<br />
+     ``` $ node -v  ```<br />
+     See if you have npm already installed.<br />
      ``` $ npm -v  ```
 
     Im currently running these versions:
@@ -39,46 +43,49 @@ I only tested in:
         v8.11.1
     ```
 
-    If you do not have node or npm you can download them from the node website.
-    https://nodejs.org/en/
-    Please install the LTS version, Latest Stable Version.
+    If you do not have node or npm you can download them from the node website.<br />
+    https://nodejs.org/en/<br />
+    Please install the LTS version, Latest Stable Version.<br />
 
-5. Create a new Database
-    Open SSMS - Sql Server Management Studio.
-    Connect to a local instance of a sql server.
-    ``` Example: (localdb) ```
-    Right click on the database.
-    Create a new database called CartegraphTown
-    ``` CartegraphTown ```
-    Copy the name of the local instance of your sql server. We  will use that in the next step.
+5. Create a new Database<br />
+    <br />
+    Open SSMS - Sql Server Management Studio.<br />
+    Connect to a local instance of a sql server.<br />
+    ``` Example: (localdb) ```<br />
+    Right click on the database.<br />
+    Create a new database called CartegraphTown<br />
+    ``` CartegraphTown ```<br />
+    Copy the name of the local instance of your sql server. We  will use that in the next step.<br />
 
-6. Connect Sql Database to projects
+6. Connect Sql Database to projects<br />
+    <br />
+    Open the CartegraphTown.Database project in Visual Studio <br />
+    Double click on the Dev.publish.xml file. [Your Repository Directory]\CartegraphTown\CartegraphTown\CartegraphTown.Database\PublishOptions\Profile\Dev.publish.xml <br />
+    Click 'Edit'. <br />
+    Click 'Browse'. <br />
+    Paste in the local instance of a sql server in the 'Server Name' input. <br />
+    Select the CartegraphTown database from the 'Database Name' drop down. <br />
+    Click 'OK'. <br />
+    Copy the 'Target database connection'. <br />
+    Click 'Save Profile'. <br />
+    Click 'Generate Script'. <br />
+    <br />
+    The script will take a minute to build.<br />
+    Run the script by clicking the Green Play button.<br />
+    Everything worked correctly when you see 'Update complete' in the T-SQL window display.<br />
+    <br />
+    Open the CartegraphTown.API project Web.config. [Your Repository Directory]\CartegraphTown\CartegraphTown\CartegraphTown.API\Web.config <br />
+    Careful not to open Web.Debug.config or Web.Release.config because they are not configured. <br />
+    Find 'CartegraphTownContext' connection string (Line 12) and paste in your 'Target database connection' from earlier. <br />
 
-    Open the CartegraphTown.Database project in Visual Studio
-    Double click on the Dev.publish.xml file. [Your Repository Directory]\CartegraphTown\CartegraphTown\CartegraphTown.Database\PublishOptions\Profile\Dev.publish.xml
-    Click 'Edit'.
-    Click 'Browse'.
-    Paste in the local instance of a sql server in the 'Server Name' input.
-    Select the CartegraphTown database from the 'Database Name' drop down.
-    Click 'OK'.
-    Copy the 'Target database connection'.
-    Click 'Save Profile'.
-    Click 'Generate Script'.
+7. Setup Multi Project Solution<br />
+    <br />
+    Right click on the solution.<br />
+    Choose 'Set Start Up Projects'.<br />
+    Select 'Multiple startup projects'.<br />
+    Set action to 'Start' on CartegraphTown.API and CartegraphTown.Web.<br />
 
-    The script will take a minute to build.
-    Run the script by clicking the Green Play button.
-    Everything worked correctly when you see 'Update complete' in the T-SQL window display.
-
-    Open the CartegraphTown.API project Web.config. [Your Repository Directory]\CartegraphTown\CartegraphTown\CartegraphTown.API\Web.config
-    Careful not to open Web.Debug.config or Web.Release.config because they are not configured.
-    Find 'CartegraphTownContext' connection string (Line 12) and paste in your 'Target database connection' from earlier.
-
-7. Setup Multi Project Solution
-    Right click on the solution.
-    Choose 'Set Start Up Projects'.
-    Select 'Multiple startup projects'.
-    Set action to 'Start' on CartegraphTown.API and CartegraphTown.Web.
-
-8. Run the apps
-    Two windows should pop up in your browser.
-    Please use Chrome for best results.
+8. Run the apps<br />
+    <br />
+    Two windows should pop up in your browser.<br />
+    Please use Chrome for best results.<br />
