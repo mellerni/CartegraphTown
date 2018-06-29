@@ -90,6 +90,8 @@
                 <input type='text' class='form-control' name='longitude' placeholder='100.0000' [(ngModel)]='address.point.longitude' #longitude="ngModel"
                 />
 
+                <!-- TODO: find a pattern that works for Longitude -->
+
                 <!-- pattern='(\d)(\d)[\.](\d{4})$' />
                 <div *ngIf='longitude.invalid && (longitude.dirty || longitude.touched)' class='alert alert-danger'>
                     <div *ngIf='longitude.errors?.pattern && longitude.touched'>
@@ -107,6 +109,12 @@
                 <a *ngIf="!activeWalkThrough" class="btn btn-default btn-lg" role="button" [routerLink]="['/location-index']">
                     <span class="fa fa-ban"></span>&nbsp;&nbsp;Cancel
                 </a>
+            </div>
+        </div>
+
+        <div *ngIf="showHelp" class="row show-help">
+            <div class='col-md-offset-4 col-md-4 col-sm-12 alert alert-info text-center'>
+                <strong>Help:</strong> Fields with with a star [*] are required.
             </div>
         </div>
     </form>

@@ -16,6 +16,7 @@ export class AddressAddEditComponent {
     public addressId: number = 0;
     public states: State[] | undefined;
     public loading: boolean = true;
+    public showHelp: boolean = true;
     public submitted: boolean = false;
     public loadingStates: boolean = true;
     public title = 'Add Address';
@@ -37,9 +38,14 @@ export class AddressAddEditComponent {
             this.addressId = params.id;
             this.getAddress();
           });
+
         if(!this.activeWalkThrough) {
             this.toastr.setRootViewContainerRef(this.vRef);
         }
+
+        setTimeout(() => {
+            this.showHelp = false;
+        }, 2500);
     }
 
     getAddress()

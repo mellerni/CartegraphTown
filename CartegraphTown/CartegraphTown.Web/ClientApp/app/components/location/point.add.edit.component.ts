@@ -14,6 +14,7 @@ export class PointAddEditComponent {
     public pointId: number = 0;
     public submitted: boolean = false;
     public loading: boolean = true;
+    public showHelp: boolean = true;
     public title = 'Add Point';
     @Input() activeWalkThrough: boolean = false;
     @Output() sendLocationId = new EventEmitter<number>();
@@ -31,9 +32,14 @@ export class PointAddEditComponent {
             this.pointId = params.id;
             this.getPoint();
           });
+
         if(!this.activeWalkThrough) {
             this.toastr.setRootViewContainerRef(this.vRef);
         }
+
+        setTimeout(() => {
+            this.showHelp = false;
+        }, 2500);
     }
 
     getPoint()

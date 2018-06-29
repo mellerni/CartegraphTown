@@ -15,6 +15,7 @@ export class IssueAddEditComponent {
     public issueId: number = 0;
     public issueTypes: IssueType[] | undefined;
     public loading: boolean = true;
+    public showHelp: boolean = true;
     public submitted: boolean = false;
     public loadingTypes: boolean = true;
     public title = 'Add Issue';
@@ -36,9 +37,14 @@ export class IssueAddEditComponent {
             this.issueId = params.id;
             this.getIssue();
           });
+
         if(!this.activeWalkThrough) {
             this.toastr.setRootViewContainerRef(this.vRef);
         }
+
+        setTimeout(() => {
+            this.showHelp = false;
+        }, 2500);
     }
 
     getIssue()

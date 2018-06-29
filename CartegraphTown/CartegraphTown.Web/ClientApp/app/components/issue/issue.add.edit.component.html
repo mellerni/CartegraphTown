@@ -30,8 +30,8 @@
         <div class="row">
             <div class='form-group col-sm-12'>
                 <label for='details'>Details *</label>
-                <textarea type='text' class='form-control' name='details' rows="4" placeholder='Please provide some details about the issue ...' required
-                    [(ngModel)]='issue.details' #details="ngModel"></textarea>
+                <textarea type='text' class='form-control' name='details' rows="4" placeholder='Please provide some details about the issue ...'
+                    required [(ngModel)]='issue.details' #details="ngModel"></textarea>
                 <div *ngIf='details.invalid && (details.dirty || details.touched)' class='alert alert-danger'>
                     <div *ngIf='details.errors?.required'>
                         Details are required
@@ -47,10 +47,10 @@
                     [(ngModel)]='issue.correctiveAction' #correctiveAction="ngModel"></textarea>
             </div>
             <div class='form-group col-sm-12'>
-                    <div class="alert alert-warning" role="alert">
-                            <strong>Warning:</strong> If you update the corrective action text the issue is considered resolved. A corrective
-                            action date will be assigned.
-                    </div>
+                <div class="alert alert-warning" role="alert">
+                    <strong>Warning:</strong> If you update the corrective action text the issue is considered resolved. A corrective
+                    action date will be assigned.
+                </div>
             </div>
         </div>
 
@@ -64,5 +64,12 @@
                 </a>
             </div>
         </div>
+
+        <div *ngIf="showHelp" class="row show-help">
+            <div class='col-md-offset-4 col-md-4 col-sm-12 alert alert-info text-center'>
+                <strong>Help:</strong> Fields with with a star [*] are required.
+            </div>
+        </div>
+
     </form>
 </div>

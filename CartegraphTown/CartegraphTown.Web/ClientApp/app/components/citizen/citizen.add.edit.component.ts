@@ -14,6 +14,7 @@ export class CitizenAddEditComponent {
     public citizenId: number = 0;
     public submitted: boolean = false;
     public loading: boolean = true;
+    public showHelp: boolean = true;
     public title = 'Add Citizen';
     @Input() activeWalkThrough: boolean = false;
     @Output() sendCitizenId = new EventEmitter<number>();
@@ -32,9 +33,14 @@ export class CitizenAddEditComponent {
             this.citizenId = params.id;
             this.getCitizen();
           });
+
         if(!this.activeWalkThrough) {
             this.toastr.setRootViewContainerRef(this.vRef);
         }
+
+        setTimeout(() => {
+            this.showHelp = false;
+        }, 2500);
     }
 
     getCitizen()
