@@ -26,8 +26,8 @@ SSMS: https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-s
 <br />
 
 ## Video links
-    Install: https://www.youtube.com/watch?v=_24fRKegk6Q [Run time 17:51]  <br />
-    Quick Demo: https://www.youtube.com/watch?v=fS2zCebbN2U [Run time 6:58] <br />
+Install: https://www.youtube.com/watch?v=_24fRKegk6Q [Run time 17:51]  <br />
+Quick Demo: https://www.youtube.com/watch?v=fS2zCebbN2U [Run time 6:58] <br />
 
 ## Installation and Setup
 
