@@ -1,8 +1,33 @@
 # CartegraphTown
 Simple web app for city employees to accept complaints from citizens
 
+## Notes
+Achitecture <br />
+    MS SQL Server <br />
+    CartegraphTown.Database <br />
+    CartegraphTown.Model <br />
+    CartegraphTown.Service <br />
+    CartegraphTown.API <br />
+    CartegraphTown.Web <br />
+
 I only tested in:
 * Chrome (67+)
+
+## Quick links (relevent 6/29/2018)
+Visual Studio 2017: https://visualstudio.microsoft.com/downloads/<br />
+<br />
+.Net Core 2: https://www.microsoft.com/net/download/dotnet-core/sdk-2.1.4<br />
+<br />
+Node and NPM: https://nodejs.org/en/<br />
+<br />
+Sql Server: https://www.microsoft.com/en-ie/sql-server/sql-server-downloads <br />
+<br />
+SSMS: https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms <br />
+<br />
+
+## Video links
+    Install: https://www.youtube.com/watch?v=_24fRKegk6Q [Run time 17:51]  <br />
+    Quick Demo: https://www.youtube.com/watch?v=fS2zCebbN2U [Run time 6:58] <br />
 
 ## Installation and Setup
 
