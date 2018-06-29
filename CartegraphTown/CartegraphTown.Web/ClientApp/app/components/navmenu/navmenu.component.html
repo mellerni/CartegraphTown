@@ -55,6 +55,19 @@
                         <span class='fa fa-map-pin'></span>&nbsp;&nbsp;Add Point
                     </a>
                 </li>
+                <li>
+                    <div *ngIf="showStatus" class='connection-test' [ngClass]="{'connected': isConnected, 'no-connection': hasLostConnection}">
+                        <p *ngIf="loading">
+                            <em>Looking for connection ...</em>
+                        </p>
+                        <p *ngIf="!loading && !states">
+                            <em>Not connected</em>
+                        </p>
+                        <p *ngIf="states">
+                            <em>Connection found</em>
+                        </p>
+                    </div>
+                </li>
             </ul>
         </div>
     </div>

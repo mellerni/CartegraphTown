@@ -57,3 +57,20 @@ li.link-active a:focus {
         text-overflow: ellipsis;
     }
 }
+
+.connection-test {
+    margin-top: 50px;
+    background-color: #DDD;
+    height: 20px;
+    width: auto;
+    border-radius: 50px;
+    text-align: center;
+}
+
+.connected {
+    background-color:#00FF83
+}
+
+.no-connection{
+    background-color: #FF69B4
+}
