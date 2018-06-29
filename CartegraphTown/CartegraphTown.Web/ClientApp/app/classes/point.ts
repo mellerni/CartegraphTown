@@ -1,8 +1,8 @@
 export class Point {
 
   public id: number = 0;
-  public latitude: string | undefined;
-  public longitude: string | undefined;
+  public latitude: number | undefined;
+  public longitude: number | undefined;
   public isCitizenLocation: boolean = true;
   public issueCount: number = 0;
 

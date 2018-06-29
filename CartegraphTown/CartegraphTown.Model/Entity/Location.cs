@@ -27,7 +27,7 @@
 
         public Location(PointDto model)
         {
-            if (model != null)
+            if (model != null && (model.Latitude.HasValue || model.Longitude.HasValue))
             {
                 this.Validate(model);
                 this.Latitude = model.Latitude;
@@ -104,7 +104,10 @@
             this.StateId = model.StateId;
             this.ZipCode = model.ZipCode;
 
-            this.Update(model.Point);
+            if (model.Point.Latitude.HasValue || model.Point.Longitude.HasValue)
+            {
+                this.Update(model.Point);
+            }
         }
 
         public void Update(PointDto model)
@@ -147,16 +150,14 @@
 
         private void Validate(PointDto model)
         {
-            // Valid Latitude for 95% of North America
-            if (model.Latitude <= 15.0000 || model.Latitude >= 75.0000)
+            if (!model.Latitude.HasValue)
             {
-                throw new ArgumentException("Latitude is invalid.");
+                throw new ArgumentException("Latitude is required.");
             }
 
-            // Valid Longitude for 95% of North America
-            if (model.Longitude <= 50.0000 || model.Longitude >= 180.0000)
+            if (!model.Longitude.HasValue)
             {
-                throw new ArgumentException("Longitude is invalid.");
+                throw new ArgumentException("Longitude is required.");
             }
         }
     }
