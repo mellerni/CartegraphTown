@@ -15,6 +15,7 @@ export class IssueAddEditComponent {
     public issueId: number = 0;
     public issueTypes: IssueType[] | undefined;
     public loading: boolean = true;
+    public submitted: boolean = false;
     public loadingTypes: boolean = true;
     public title = 'Add Issue';
     @Input() activeWalkThrough: boolean = false;
@@ -25,9 +26,7 @@ export class IssueAddEditComponent {
                 private activeRoute: ActivatedRoute,
                 private router: Router,
                 private toastr: ToastsManager,
-                private vRef: ViewContainerRef) {
-        this.toastr.setRootViewContainerRef(vRef);
-    }
+                private vRef: ViewContainerRef) {}
 
     ngOnInit() {
         this.issue = new Issue();
@@ -37,6 +36,9 @@ export class IssueAddEditComponent {
             this.issueId = params.id;
             this.getIssue();
           });
+        if(!this.activeWalkThrough) {
+            this.toastr.setRootViewContainerRef(this.vRef);
+        }
     }
 
     getIssue()
@@ -71,8 +73,19 @@ export class IssueAddEditComponent {
             this.issue.locationId = this.walkThroughLocationId;
         }
 
+        // TODO: Use reactive form validation next time
         if (!this.issue.citizenId || !this.issue.locationId){
-            this.toastr.error('Missing location or citizen. Can not save', 'Error:');
+            this.toastr.error('Missing location or citizen. Could not save.', 'Error:');
+            return;
+        }
+
+        if (!this.issue.issueTypeId || this.issue.issueTypeId === 0) {
+            this.toastr.warning('Type are required.', 'Warning:');
+            return;
+        }
+
+        if (!this.issue.details) {
+            this.toastr.warning('Details are required.', 'Warning:');
             return;
         }
 
@@ -98,7 +111,8 @@ export class IssueAddEditComponent {
     failure(error: any)
     {
         var body = JSON.parse(error._body);
-        this.toastr.error(body.message, 'Error:')
+        this.toastr.error(body.message, 'Error:');
+        this.submitted = false;
     }
 
 }

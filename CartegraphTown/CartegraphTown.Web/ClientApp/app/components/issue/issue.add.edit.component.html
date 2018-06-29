@@ -6,7 +6,7 @@
     <form *ngIf="!loading" (ngSubmit)='onSubmit()' #issueForm='ngForm'>
         <div class="row">
             <div class='form-group col-sm-12'>
-                <label for='issueTypeId'>Type</label>
+                <label for='issueTypeId'>Type *</label>
                 <div *ngIf="!loadingTypes && issueTypes">
                     <select class="select-match" name='issueTypeId' [(ngModel)]="issue.issueTypeId" required #issueTypeId="ngModel">
                         <option *ngFor="let issueType of issueTypes" [value]="issueType.id" [attr.selected]="issue.issueTypeId === issueType.id ? true : null">
@@ -29,7 +29,7 @@
 
         <div class="row">
             <div class='form-group col-sm-12'>
-                <label for='details'>Details</label>
+                <label for='details'>Details *</label>
                 <textarea type='text' class='form-control' name='details' rows="4" placeholder='Please provide some details about the issue ...' required
                     [(ngModel)]='issue.details' #details="ngModel"></textarea>
                 <div *ngIf='details.invalid && (details.dirty || details.touched)' class='alert alert-danger'>
@@ -56,8 +56,8 @@
 
         <div class="row">
             <div class="col-sm-text-center">
-                <button type='submit' class='btn btn-primary btn-lg' [disabled]='!issueForm.form.valid || !issue.issueTypeId || issue.issueTypeId === 0'>
-                    <span class="fa fa-save"></span>&nbsp;&nbsp;Save
+                <button type='submit' class='btn btn-primary btn-lg' [disabled]='submitted'>
+                    <span class="fa fa-save"></span>&nbsp;&nbsp;{{submitted ? 'Saving ...' : 'Save'}}
                 </button>
                 <a *ngIf="!activeWalkThrough" class="btn btn-default btn-lg" role="button" [routerLink]="['/issue-index']">
                     <span class="fa fa-ban"></span>&nbsp;&nbsp;Cancel

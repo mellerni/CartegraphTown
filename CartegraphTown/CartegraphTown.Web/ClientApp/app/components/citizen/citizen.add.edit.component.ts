@@ -12,6 +12,7 @@ import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 export class CitizenAddEditComponent {
     public citizen: Citizen = new Citizen();
     public citizenId: number = 0;
+    public submitted: boolean = false;
     public loading: boolean = true;
     public title = 'Add Citizen';
     @Input() activeWalkThrough: boolean = false;
@@ -21,9 +22,7 @@ export class CitizenAddEditComponent {
                 private activeRoute: ActivatedRoute,
                 private router: Router,
                 private toastr: ToastsManager,
-                private vRef: ViewContainerRef) {
-        this.toastr.setRootViewContainerRef(vRef);
-    }
+                private vRef: ViewContainerRef) {}
 
     ngOnInit() {
         this.loading = true;
@@ -33,6 +32,9 @@ export class CitizenAddEditComponent {
             this.citizenId = params.id;
             this.getCitizen();
           });
+        if(!this.activeWalkThrough) {
+            this.toastr.setRootViewContainerRef(this.vRef);
+        }
     }
 
     getCitizen()
@@ -52,6 +54,23 @@ export class CitizenAddEditComponent {
 
     onSubmit()
     {
+        // TODO: Use reactive form validation next time
+        if (!this.citizen.firstName){
+            this.toastr.warning('First name is required.', 'Warning:');
+            return;
+        }
+
+        if (!this.citizen.lastName){
+            this.toastr.warning('Last name is required.', 'Warning:');
+            return;
+        }
+
+        if (!this.citizen.phone && !this.citizen.email){
+            this.toastr.warning('Some form of contact info is required. Please include phone number or email.', 'Warning:');
+            return;
+        }
+
+        this.submitted = true;
         if(this.citizen.id === 0){
             this.citizenService.post(this.citizen)
                 .then(result => {
@@ -79,7 +98,8 @@ export class CitizenAddEditComponent {
     failure(error: any)
     {
         var body = JSON.parse(error._body);
-        this.toastr.error(body.message, 'Error:')
+        this.toastr.error(body.message, 'Error:');
+        this.submitted = false;
     }
 
 }

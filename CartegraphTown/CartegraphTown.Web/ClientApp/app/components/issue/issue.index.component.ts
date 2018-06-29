@@ -43,7 +43,7 @@ export class IssueIndexComponent {
     failure(error: any)
     {
         var body = JSON.parse(error._body);
-        this.toastr.error(body.message, 'Error:')
+        this.toastr.error(body.message, 'Error:');
     }
 
 }

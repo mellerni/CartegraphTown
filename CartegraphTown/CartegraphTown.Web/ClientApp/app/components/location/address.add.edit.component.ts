@@ -16,6 +16,7 @@ export class AddressAddEditComponent {
     public addressId: number = 0;
     public states: State[] | undefined;
     public loading: boolean = true;
+    public submitted: boolean = false;
     public loadingStates: boolean = true;
     public title = 'Add Address';
     @Input() activeWalkThrough: boolean = false;
@@ -26,9 +27,7 @@ export class AddressAddEditComponent {
                 private activeRoute: ActivatedRoute,
                 private router: Router,
                 private toastr: ToastsManager,
-                private vRef: ViewContainerRef) {
-        this.toastr.setRootViewContainerRef(vRef);
-    }
+                private vRef: ViewContainerRef) {}
 
     ngOnInit() {
         this.address = new Address();
@@ -38,6 +37,9 @@ export class AddressAddEditComponent {
             this.addressId = params.id;
             this.getAddress();
           });
+        if(!this.activeWalkThrough) {
+            this.toastr.setRootViewContainerRef(this.vRef);
+        }
     }
 
     getAddress()
@@ -65,8 +67,40 @@ export class AddressAddEditComponent {
         .catch(error => this.failure(error));
     }
 
-    onSubmit()
+    onSubmit(errors: any)
     {
+        // TODO: Use reactive form validation next time
+        if(!this.address.address1) {
+            this.toastr.warning('Address Line One is required', 'Warning:');
+            return;
+        }
+
+        if(!this.address.city) {
+            this.toastr.warning('City is required', 'Warning:');
+            return;
+        }
+
+        if (!this.address.stateId || this.address.stateId === 0) {
+            this.toastr.warning('State is required.', 'Warning:');
+            return;
+        }
+
+        if(!this.address.zipCode) {
+            this.toastr.warning('Zip code is required', 'Warning:');
+            return;
+        }
+
+        if(this.address.point && !this.address.point.latitude && this.address.point.longitude) {
+            this.toastr.warning('Latitude is required', 'Warning:');
+            return;
+        }
+
+        if(this.address.point && this.address.point.latitude && !this.address.point.longitude) {
+            this.toastr.warning('Longitude is required', 'Warning:');
+            return;
+        }
+
+        this.submitted = true;
         if(this.address.id === 0){
             this.locationService.postAddress(this.address)
                 .then(result => {
@@ -94,7 +128,8 @@ export class AddressAddEditComponent {
     failure(error: any)
     {
         var body = JSON.parse(error._body);
-        this.toastr.error(body.message, 'Error:')
+        this.toastr.error(body.message, 'Error:');
+        this.submitted = false;
     }
 
 }

@@ -12,6 +12,7 @@ import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 export class PointAddEditComponent {
     public point: Point = new Point();
     public pointId: number = 0;
+    public submitted: boolean = false;
     public loading: boolean = true;
     public title = 'Add Point';
     @Input() activeWalkThrough: boolean = false;
@@ -21,9 +22,7 @@ export class PointAddEditComponent {
                 private activeRoute: ActivatedRoute,
                 private router: Router,
                 private toastr: ToastsManager,
-                private vRef: ViewContainerRef) {
-        this.toastr.setRootViewContainerRef(vRef);
-    }
+                private vRef: ViewContainerRef) {}
 
     ngOnInit() {
         this.point = new Point();
@@ -32,6 +31,9 @@ export class PointAddEditComponent {
             this.pointId = params.id;
             this.getPoint();
           });
+        if(!this.activeWalkThrough) {
+            this.toastr.setRootViewContainerRef(this.vRef);
+        }
     }
 
     getPoint()
@@ -51,6 +53,19 @@ export class PointAddEditComponent {
 
     onSubmit()
     {
+
+        // TODO: Use reactive form validation next time
+        if(!this.point.latitude) {
+            this.toastr.warning('Latitude is required', 'Warning:');
+            return;
+        }
+
+        if(!this.point.longitude) {
+            this.toastr.warning('Longitude is required', 'Warning:');
+            return;
+        }
+
+        this.submitted = true;
         if(this.point.id === 0){
             this.locationService.postPoint(this.point)
                 .then(result => {
@@ -78,7 +93,8 @@ export class PointAddEditComponent {
     failure(error: any)
     {
         var body = JSON.parse(error._body);
-        this.toastr.error(body.message, 'Error:')
+        this.toastr.error(body.message, 'Error:');
+        this.submitted = false;
     }
 
 }

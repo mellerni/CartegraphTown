@@ -3,10 +3,10 @@
     <p *ngIf="loading">
         <em>Loading...</em>
     </p>
-    <form *ngIf="!loading" (ngSubmit)='onSubmit()' #addressForm='ngForm'>
+    <form *ngIf="!loading" (ngSubmit)='onSubmit(addressForm.errors)' #addressForm='ngForm'>
         <div class="row">
             <div class='form-group col-md-6 col-sm-12'>
-                <label for='address1'>Address Line One</label>
+                <label for='address1'>Address Line One *</label>
                 <input type='text' class='form-control' id='address1' name='address1' placeholder='123 Main St.' required [(ngModel)]='address.address1'
                     #address1="ngModel" />
 
@@ -26,7 +26,7 @@
 
         <div class="row">
             <div class='form-group col-md-6 col-sm-12'>
-                <label for='city'>City</label>
+                <label for='city'>City *</label>
                 <input type='text' class='form-control' id='city' name='city' placeholder='Dubuque' required [(ngModel)]='address.city' #city="ngModel"
                 />
                 <div *ngIf='city.invalid && (city.dirty || city.touched)' class='alert alert-danger'>
@@ -37,7 +37,7 @@
             </div>
 
             <div class='form-group col-md-6 col-sm-12'>
-                <label for='stateId'>State</label>
+                <label for='stateId'>State *</label>
                 <div *ngIf="!loadingStates && states">
                     <select id='stateId' class="select-match" name='stateId' [(ngModel)]="address.stateId" required #stateId="ngModel">
                         <option *ngFor="let state of states" [value]="state.id" [attr.selected]="address.stateId === state.id ? true : null">
@@ -61,7 +61,7 @@
 
         <div class="row">
             <div class='form-group col-md-6 col-sm-12'>
-                <label for='zipCode'>Zip Code</label>
+                <label for='zipCode'>Zip Code *</label>
                 <input type='text' class='form-control' id='zipCode' name='zipCode' placeholder='45678 or 45678-1234' required [(ngModel)]='address.zipCode'
                     #zipCode="ngModel" />
                 <div *ngIf='zipCode.invalid && (zipCode.dirty || zipCode.touched)' class='alert alert-danger'>
@@ -99,11 +99,10 @@
             </div>
         </div>
 
-
         <div class="row">
             <div class="col-sm-text-center">
-                <button type='submit' class='btn btn-primary btn-lg' [disabled]='!addressForm.form.valid || !address.stateId || address.stateId === 0'>
-                    <span class="fa fa-save"></span>&nbsp;&nbsp;Save
+                <button type='submit' class='btn btn-primary btn-lg' [disabled]='submitted'>
+                    <span class="fa fa-save"></span>&nbsp;&nbsp;{{submitted ? 'Saving ...' : 'Save'}}
                 </button>
                 <a *ngIf="!activeWalkThrough" class="btn btn-default btn-lg" role="button" [routerLink]="['/location-index']">
                     <span class="fa fa-ban"></span>&nbsp;&nbsp;Cancel
